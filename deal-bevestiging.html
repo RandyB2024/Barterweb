@@ -62,7 +62,14 @@
           <form class="deal-form" id="barterDealForm">
             <input type="hidden" name="deal_id" id="dealIdInput" />
             <input type="hidden" name="signature_data" id="signatureData" />
+            <input type="hidden" name="signature_status" id="signatureStatus" value="Niet ondertekend" />
             <input type="hidden" name="status" value="concept" />
+            <input type="hidden" name="email" id="dealEmailAlias" />
+            <input type="hidden" name="to_email" id="dealToEmail" />
+            <input type="hidden" name="name" id="dealNameAlias" />
+            <input type="hidden" name="project_type" value="BarterWeb dealbevestiging" />
+            <input type="hidden" name="website_url" value="https://barterweb.nl" />
+            <input type="hidden" name="logo_url" value="https://barterweb.nl/barterweb-logo.svg" />
 
             <div class="deal-step">
               <p class="eyebrow">Stap 1</p>
@@ -224,7 +231,7 @@
       </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script src="./deal.js"></script>
+    <script data-cookieconsent="ignore" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script data-cookieconsent="ignore" src="./deal.js"></script>
   </body>
 </html>

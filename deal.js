@@ -5,6 +5,7 @@ const EMAILJS_PUBLIC_KEY = "M5obhqMfQPx6qKQ9c";
 const form = document.querySelector("#barterDealForm");
 const canvas = document.querySelector("#signatureCanvas");
 const signatureInput = document.querySelector("#signatureData");
+const signatureStatus = document.querySelector("#signatureStatus");
 const signaturePreview = document.querySelector("#signaturePreview");
 const clearButton = document.querySelector("#clearSignature");
 const printButton = document.querySelector("#printAgreement");
@@ -79,6 +80,7 @@ function updateSignature() {
   if (!hasSignature) return;
   const dataUrl = canvas.toDataURL("image/png");
   signatureInput.value = dataUrl;
+  if (signatureStatus) signatureStatus.value = "Ondertekend";
   signaturePreview.src = dataUrl;
   signaturePreview.style.display = "block";
 }
@@ -87,12 +89,82 @@ function clearSignature() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   hasSignature = false;
   signatureInput.value = "";
+  if (signatureStatus) signatureStatus.value = "Niet ondertekend";
   signaturePreview.removeAttribute("src");
   signaturePreview.style.display = "none";
 }
 
 function value(name) {
   return new FormData(form).get(name) || "Nog niet ingevuld";
+}
+
+function rawValue(name) {
+  return String(new FormData(form).get(name) || "").trim();
+}
+
+function syncEmailAliases() {
+  const email = rawValue("customer_email");
+  const name = rawValue("customer_name");
+  const emailAlias = document.querySelector("#dealEmailAlias");
+  const toEmail = document.querySelector("#dealToEmail");
+  const nameAlias = document.querySelector("#dealNameAlias");
+
+  if (emailAlias) emailAlias.value = email;
+  if (toEmail) toEmail.value = email;
+  if (nameAlias) nameAlias.value = name;
+}
+
+function buildDealEmailParams() {
+  const customerName = rawValue("customer_name");
+  const companyName = rawValue("company_name");
+  const customerEmail = rawValue("customer_email");
+  const customerPhone = rawValue("customer_phone");
+  const deliverable = rawValue("barterweb_deliverable");
+  const scope = rawValue("barterweb_scope");
+  const trade = rawValue("customer_trade");
+  const tradeDetails = rawValue("customer_trade_details");
+  const barterwebValue = rawValue("barterweb_value");
+  const customerValue = rawValue("customer_value");
+  const barterwebDeliveryDate = rawValue("barterweb_delivery_date");
+  const customerDeliveryDate = rawValue("customer_delivery_date");
+
+  return {
+    deal_id: dealId,
+    status: "concept",
+    customer_name: customerName,
+    company_name: companyName,
+    customer_email: customerEmail,
+    customer_phone: customerPhone,
+    barterweb_deliverable: deliverable,
+    barterweb_scope: scope,
+    customer_trade: trade,
+    customer_trade_details: tradeDetails,
+    barterweb_value: barterwebValue,
+    customer_value: customerValue,
+    barterweb_delivery_date: barterwebDeliveryDate,
+    customer_delivery_date: customerDeliveryDate,
+    signature_status: hasSignature ? "Ondertekend" : "Niet ondertekend",
+    email: customerEmail,
+    to_email: customerEmail,
+    reply_to: customerEmail,
+    from_name: customerName || "BarterWeb klant",
+    name: customerName || "BarterWeb klant",
+    project_type: "BarterWeb dealbevestiging",
+    website_url: "https://barterweb.nl",
+    logo_url: "https://barterweb.nl/barterweb-logo.svg",
+    message: [
+      `Deal-ID: ${dealId}`,
+      `Klant: ${customerName}${companyName ? ` (${companyName})` : ""}`,
+      `BarterWeb levert: ${deliverable}`,
+      `Klant ruilt: ${trade}`,
+      `Waarde BarterWeb: ${barterwebValue}`,
+      `Waarde tegenprestatie: ${customerValue}`,
+      `Levertermijn BarterWeb: ${barterwebDeliveryDate}`,
+      `Levertermijn klant: ${customerDeliveryDate}`,
+      "Status: concept",
+      "Handtekening: digitaal gezet",
+    ].join("\n"),
+  };
 }
 
 function escapeHtml(text) {
@@ -105,10 +177,11 @@ function escapeHtml(text) {
 }
 
 function refreshAgreement() {
+  syncEmailAliases();
   const company = value("company_name");
   agreementDetails.innerHTML = `
     <dt>Partijen</dt>
-    <dd>${escapeHtml(value("customer_name"))} ${company !== "Nog niet ingevuld" ? `(${escapeHtml(company)})` : ""}<br>${escapeHtml(value("customer_email"))} · ${escapeHtml(value("customer_phone"))}</dd>
+    <dd>${escapeHtml(value("customer_name"))} ${company !== "Nog niet ingevuld" ? `(${escapeHtml(company)})` : ""}<br>${escapeHtml(value("customer_email"))} - ${escapeHtml(value("customer_phone"))}</dd>
     <dt>BarterWeb levert</dt>
     <dd><strong>${escapeHtml(value("barterweb_deliverable"))}</strong><br>${escapeHtml(value("barterweb_scope"))}</dd>
     <dt>Klant ruilt</dt>
@@ -143,19 +216,23 @@ form.addEventListener("submit", async (event) => {
   }
 
   statusText.textContent = "Dealbevestiging wordt klaargezet...";
+  const submitButton = form.querySelector(".deal-submit");
+  if (submitButton) submitButton.disabled = true;
 
   if (window.emailjs) {
     try {
-      await emailjs.sendForm(DEAL_SERVICE_ID, DEAL_TEMPLATE_ID, form);
+      await emailjs.send(DEAL_SERVICE_ID, DEAL_TEMPLATE_ID, buildDealEmailParams());
       statusText.textContent = "Dealbevestiging verzonden. Je kunt nu de PDF downloaden.";
     } catch (error) {
       console.error("EmailJS deal error:", error);
-      statusText.textContent = "PDF staat klaar. Mail verzenden lukte niet; controleer je EmailJS dealtemplate.";
+      const details = error?.text || error?.message || "onbekende fout";
+      statusText.textContent = `PDF staat klaar, maar de mail is niet verzonden: ${details}`;
     }
   } else {
-    statusText.textContent = "PDF staat klaar. EmailJS kon niet laden.";
+    statusText.textContent = "PDF staat klaar, maar EmailJS kon niet laden. Controleer Cookiebot of je internetverbinding.";
   }
 
+  if (submitButton) submitButton.disabled = false;
   document.querySelector("#agreement").scrollIntoView({ behavior: "smooth", block: "start" });
 });
 
