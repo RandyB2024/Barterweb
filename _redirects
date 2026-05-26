@@ -1,0 +1,8 @@
+/deal-bevestiging /deal-bevestiging.html 200
+/algemene-voorwaarden /algemene-voorwaarden.html 200
+/privacyverklaring /privacyverklaring.html 200
+
+/index.html / 301
+/deal-bevestiging.html /deal-bevestiging 301
+/algemene-voorwaarden.html /algemene-voorwaarden 301
+/privacyverklaring.html /privacyverklaring 301

@@ -945,6 +945,58 @@ h2 {
 .audience-card:nth-child(3) { background: linear-gradient(145deg, #fff, #f4f1ff); }
 .audience-card:nth-child(4) { background: linear-gradient(145deg, #fff, #fff4ef); }
 
+.faq-section {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.86), rgba(238,248,255,0.66)),
+    radial-gradient(circle at 12% 18%, rgba(15,186,165,0.1), transparent 32%),
+    radial-gradient(circle at 88% 12%, rgba(37,99,235,0.1), transparent 28%);
+}
+
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.faq-item {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
+.faq-item summary {
+  cursor: pointer;
+  padding: 22px 24px;
+  color: var(--ink);
+  font-weight: 850;
+  list-style: none;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: "+";
+  float: right;
+  color: var(--teal);
+  font-size: 20px;
+  line-height: 1;
+}
+
+.faq-item[open] summary::after {
+  content: "-";
+}
+
+.faq-item p {
+  margin: 0;
+  padding: 0 24px 22px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
 .final-card {
   display: grid;
   grid-template-columns: 0.9fr 1.1fr;
@@ -1890,6 +1942,7 @@ textarea::placeholder {
   .tool-tabs,
   .tool-panel,
   .tool-checks,
+  .faq-grid,
   .value-grid,
   .timeline,
   .deal-strip,
