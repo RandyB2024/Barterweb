@@ -1,0 +1,2718 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>BarterWeb - Websites in ruil voor waarde</title>
+    <meta
+      name="description"
+      content="BarterWeb bouwt premium websites, webshops en webapps in ruil voor waardevolle samenwerking."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml" />
+    <style>
+:root {
+  --page: #f7fafc;
+  --surface: #ffffff;
+  --surface-soft: #eef6f8;
+  --ink: #111827;
+  --muted: #5f6f82;
+  --line: #dce7ee;
+  --blue: #2563eb;
+  --teal: #0fbaa5;
+  --green: #18a76f;
+  --violet: #6d5dfc;
+  --coral: #ff6b4a;
+  --shadow: 0 24px 70px rgba(34, 64, 94, 0.12);
+  --radius: 22px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background:
+    radial-gradient(circle at 12% 0%, rgba(15, 186, 165, 0.12), transparent 30%),
+    radial-gradient(circle at 90% 6%, rgba(37, 99, 235, 0.1), transparent 28%),
+    linear-gradient(180deg, #fbfdff 0%, var(--page) 45%, #ffffff 100%);
+  overflow-x: hidden;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: auto 0 0;
+  height: 38vh;
+  z-index: -3;
+  pointer-events: none;
+  background: linear-gradient(120deg, rgba(15, 186, 165, 0.08), rgba(37, 99, 235, 0.07), rgba(109, 93, 252, 0.06));
+  clip-path: polygon(0 28%, 100% 0, 100% 100%, 0 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(37, 99, 235, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37, 99, 235, 0.045) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 58%);
+}
+
+.site-glow {
+  display: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+.container {
+  width: min(1160px, calc(100% - 48px));
+  margin: 0 auto;
+}
+
+.nav-shell {
+  position: fixed;
+  top: 18px;
+  left: 50%;
+  z-index: 30;
+  width: min(1160px, calc(100% - 32px));
+  min-height: 70px;
+  display: grid;
+  grid-template-columns: 220px 1fr 160px;
+  align-items: center;
+  transform: translateX(-50%);
+  border: 1px solid rgba(220, 231, 238, 0.9);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 16px 42px rgba(34, 64, 94, 0.1);
+  backdrop-filter: blur(18px);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding-left: 20px;
+}
+
+.brand strong {
+  font-size: 18px;
+  letter-spacing: 0;
+}
+
+.brand strong span {
+  color: var(--blue);
+}
+
+.brand-mark {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--teal), var(--blue));
+  box-shadow: 0 12px 24px rgba(15, 186, 165, 0.22), inset 0 1px 0 rgba(255,255,255,0.45);
+  overflow: hidden;
+}
+
+.brand-mark::before {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  border-radius: 9px;
+  background: linear-gradient(145deg, rgba(255,255,255,0.22), rgba(255,255,255,0.04));
+}
+
+.brand-mark i {
+  position: relative;
+  z-index: 1;
+  width: 23px;
+  height: 23px;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+}
+
+.brand-mark i::before,
+.brand-mark i::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  width: 13px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--teal), var(--blue));
+}
+
+.brand-mark i::before {
+  top: 7px;
+  transform: rotate(-24deg);
+}
+
+.brand-mark i::after {
+  bottom: 7px;
+  transform: rotate(-24deg);
+}
+
+.nav-shell nav {
+  justify-self: center;
+  display: flex;
+  gap: 26px;
+  color: #536579;
+  font-size: 14px;
+  font-weight: 650;
+}
+
+.nav-shell nav a {
+  transition: color 0.2s ease;
+}
+
+.nav-shell nav a:hover {
+  color: var(--blue);
+}
+
+.nav-cta,
+.button,
+.contact-form button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  border: 0;
+  border-radius: 12px;
+  color: #fff;
+  background: #111827;
+  box-shadow: 0 14px 28px rgba(17, 24, 39, 0.16);
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.nav-cta {
+  justify-self: end;
+  margin-right: 11px;
+  padding: 0 20px;
+  font-size: 14px;
+}
+
+.nav-cta:hover,
+.button:hover,
+.contact-form button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 36px rgba(17, 24, 39, 0.2);
+}
+
+.section {
+  position: relative;
+  padding: 118px 0;
+}
+
+.section-grid {
+  background-image:
+    linear-gradient(rgba(37, 99, 235, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37, 99, 235, 0.045) 1px, transparent 1px);
+  background-size: 72px 72px;
+}
+
+.hero {
+  min-height: 100vh;
+  display: block;
+  padding-top: 126px;
+  padding-bottom: 0;
+  overflow: hidden;
+}
+
+.hero-layout {
+  padding-bottom: 86px;
+}
+
+.hero-layout {
+  display: grid;
+  grid-template-columns: 1.02fr 0.98fr;
+  gap: 70px;
+  align-items: center;
+}
+
+.kicker,
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 22px;
+  padding: 8px 13px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: #29445f;
+  background: rgba(255, 255, 255, 0.78);
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.kicker span,
+.eyebrow::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--teal);
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  max-width: 760px;
+  margin-bottom: 28px;
+  font-size: clamp(54px, 6.2vw, 94px);
+  line-height: 0.96;
+  letter-spacing: 0;
+  font-weight: 900;
+}
+
+.hero-copy {
+  position: relative;
+}
+
+.hero-copy::before {
+  content: "";
+  position: absolute;
+  left: -28px;
+  top: 54px;
+  width: 6px;
+  height: 172px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--teal), var(--blue), var(--violet));
+}
+
+h1 em,
+h2 em,
+h2 span {
+  color: transparent;
+  background: linear-gradient(110deg, var(--teal), var(--blue) 58%, var(--violet));
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-style: normal;
+}
+
+.hero-lead,
+.section-head p,
+.sticky-copy p,
+.final-card p {
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.72;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  margin: 38px 0 42px;
+}
+
+.button {
+  min-height: 58px;
+  padding: 0 24px;
+}
+
+.button.primary {
+  background: linear-gradient(135deg, #111827, #243247);
+}
+
+.button.ghost {
+  color: var(--ink);
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: none;
+}
+
+.signal-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  max-width: 660px;
+}
+
+.signal-row div {
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.signal-row strong {
+  display: block;
+  font-size: 25px;
+  line-height: 1.08;
+}
+
+.signal-row span {
+  display: block;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.hero-console {
+  position: relative;
+}
+
+.console-frame {
+  position: relative;
+  min-height: 560px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: linear-gradient(145deg, #ffffff, #edf8fb);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  transform: rotate(-1.5deg);
+  transition: transform 0.35s ease;
+}
+
+.hero-console:hover .console-frame {
+  transform: rotate(0deg) translateY(-6px);
+}
+
+.console-frame::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 72% 18%, rgba(37, 99, 235, 0.1), transparent 28%),
+    radial-gradient(circle at 24% 78%, rgba(15, 186, 165, 0.12), transparent 28%);
+  pointer-events: none;
+}
+
+.console-frame::after {
+  content: "";
+  position: absolute;
+  inset: 18px;
+  border: 1px solid rgba(220, 231, 238, 0.6);
+  border-radius: 21px;
+  pointer-events: none;
+}
+
+.console-top {
+  position: relative;
+  z-index: 1;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 14px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: #fff;
+}
+
+.console-top span {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #ff6b6b;
+}
+
+.console-top span:nth-child(2) {
+  background: #f7c948;
+}
+
+.console-top span:nth-child(3) {
+  background: #20c997;
+}
+
+.console-top p {
+  margin: 0 0 0 12px;
+  color: #6e8198;
+  font-size: 13px;
+}
+
+.console-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 18px;
+}
+
+.metric-card,
+.orbit-ui {
+  min-height: 155px;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.86);
+}
+
+.metric-card {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.metric-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 36px rgba(34, 64, 94, 0.1);
+}
+
+.metric-card.large {
+  grid-column: span 2;
+  min-height: 170px;
+}
+
+.metric-card small {
+  display: block;
+  color: #65778d;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.metric-card strong {
+  display: block;
+  margin-top: 16px;
+  font-size: clamp(32px, 4vw, 54px);
+  line-height: 1;
+}
+
+.meter {
+  height: 11px;
+  margin-top: 30px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #dbe9f2;
+}
+
+.meter i {
+  display: block;
+  width: 84%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--teal), var(--blue));
+  animation: meterFlow 3.2s ease-in-out infinite alternate;
+}
+
+.orbit-ui {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 250px;
+  overflow: hidden;
+}
+
+.core {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 86px;
+  height: 86px;
+  border-radius: 24px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--teal), var(--blue));
+  font-weight: 900;
+  box-shadow: 0 20px 44px rgba(37, 99, 235, 0.18);
+}
+
+.ring {
+  position: absolute;
+  border: 1px solid rgba(37, 99, 235, 0.18);
+  border-radius: 50%;
+  animation: rotate 18s linear infinite;
+}
+
+.r1 {
+  width: 220px;
+  height: 120px;
+}
+
+.r2 {
+  width: 170px;
+  height: 250px;
+  animation-duration: 24s;
+  animation-direction: reverse;
+}
+
+.node {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 0 6px rgba(15, 186, 165, 0.12);
+}
+
+.n1 { left: 24%; top: 26%; }
+.n2 { right: 18%; top: 55%; background: var(--blue); box-shadow: 0 0 0 6px rgba(37, 99, 235, 0.12); }
+.n3 { left: 54%; bottom: 18%; background: var(--coral); box-shadow: 0 0 0 6px rgba(255, 107, 74, 0.12); }
+
+.code-strip {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.code-strip span {
+  padding: 15px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  color: #63758c;
+  background: #fff;
+  font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+  font-size: 12px;
+}
+
+.marquee {
+  position: relative;
+  left: auto;
+  right: auto;
+  bottom: auto;
+  overflow: hidden;
+  border-block: 1px solid rgba(220, 231, 238, 0.75);
+  background: rgba(255, 255, 255, 0.58);
+  backdrop-filter: blur(12px);
+}
+
+.marquee div {
+  display: flex;
+  width: max-content;
+  gap: 16px;
+  padding: 13px 0;
+  animation: marquee 28s linear infinite;
+}
+
+.marquee span {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: #43566d;
+  font-size: 13px;
+  font-weight: 850;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+}
+
+.marquee span::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--teal);
+}
+
+.floating-chip {
+  position: absolute;
+  z-index: 3;
+  padding: 12px 15px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: #263d57;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 16px 36px rgba(34, 64, 94, 0.12);
+  backdrop-filter: blur(14px);
+  font-size: 13px;
+  font-weight: 800;
+  animation: chipFloat 5.4s ease-in-out infinite;
+}
+
+.chip-a { top: 58px; left: -18px; }
+.chip-b { right: -18px; top: 210px; animation-delay: -1.8s; }
+.chip-c { left: 42px; bottom: 78px; animation-delay: -3.2s; }
+
+.section-head {
+  max-width: 820px;
+  margin-bottom: 58px;
+}
+
+.section-head.center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+h2 {
+  margin-bottom: 22px;
+  font-size: clamp(38px, 4.5vw, 64px);
+  line-height: 1.04;
+  letter-spacing: 0;
+  font-weight: 900;
+}
+
+.model-section,
+.barter-section,
+.package-section,
+.final-section {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(238, 248, 255, 0.28));
+}
+
+.process-section,
+.audience-section {
+  background:
+    linear-gradient(135deg, rgba(15, 186, 165, 0.08), transparent 34%),
+    linear-gradient(225deg, rgba(37, 99, 235, 0.08), transparent 36%);
+}
+
+.barter-section {
+  padding-top: 94px;
+}
+
+.barter-panel {
+  display: grid;
+  grid-template-columns: 0.84fr 1.16fr;
+  gap: 46px;
+  align-items: start;
+  padding: 42px;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background:
+    linear-gradient(135deg, rgba(15, 186, 165, 0.08), transparent 34%),
+    linear-gradient(225deg, rgba(37, 99, 235, 0.08), transparent 34%),
+    #fff;
+  box-shadow: var(--shadow);
+}
+
+.barter-panel h2 {
+  margin-bottom: 0;
+  font-size: clamp(34px, 3.4vw, 52px);
+}
+
+.barter-copy p {
+  margin-bottom: 18px;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.78;
+}
+
+.barter-copy p:last-child {
+  margin-bottom: 0;
+}
+
+.barter-examples {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 12px;
+}
+
+.barter-examples span {
+  padding: 10px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: #27415f;
+  background: var(--surface-soft);
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.value-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.9fr 0.9fr;
+  gap: 18px;
+}
+
+.value-card,
+.timeline-card,
+.feature-card,
+.audience-card,
+.final-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+  box-shadow: 0 18px 50px rgba(34, 64, 94, 0.1);
+}
+
+.value-card::after,
+.timeline-card::after,
+.feature-card::after,
+.audience-card::after {
+  content: "";
+  position: absolute;
+  right: -42px;
+  bottom: -42px;
+  width: 130px;
+  height: 130px;
+  border: 1px solid rgba(37, 99, 235, 0.11);
+  border-radius: 32px;
+  transform: rotate(22deg);
+}
+
+.value-card {
+  min-height: 310px;
+  padding: 32px;
+}
+
+.value-card::before,
+.feature-card::before,
+.audience-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: linear-gradient(90deg, var(--teal), var(--blue), var(--violet));
+}
+
+.value-card span {
+  color: rgba(37, 99, 235, 0.16);
+  font-size: 50px;
+  font-weight: 900;
+}
+
+.value-card h3,
+.timeline-card h3,
+.feature-card h3,
+.audience-card h3 {
+  margin: 28px 0 14px;
+  font-size: 24px;
+}
+
+.value-card p,
+.timeline-card p,
+.feature-card p,
+.audience-card p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.72;
+}
+
+.featured {
+  background: linear-gradient(145deg, #ffffff, #edf8fb);
+}
+
+.deal-strip {
+  display: grid;
+  grid-template-columns: 1fr 42px 1fr 42px 1fr;
+  gap: 16px;
+  align-items: center;
+  margin-top: 22px;
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 18px 50px rgba(34, 64, 94, 0.08);
+}
+
+.deal-strip div {
+  min-height: 92px;
+  padding: 18px;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #f8fcff, #eef8fb);
+}
+
+.deal-strip strong {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 18px;
+}
+
+.deal-strip span {
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.deal-strip i {
+  height: 2px;
+  background: linear-gradient(90deg, var(--teal), var(--blue));
+  position: relative;
+}
+
+.deal-strip i::after {
+  content: "";
+  position: absolute;
+  right: -2px;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  border-top: 2px solid var(--blue);
+  border-right: 2px solid var(--blue);
+  transform: translateY(-50%) rotate(45deg);
+}
+
+.timeline {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+  position: relative;
+}
+
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 7%;
+  right: 7%;
+  top: 28px;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(15, 186, 165, 0), var(--teal), var(--blue), rgba(37, 99, 235, 0));
+}
+
+.timeline-card {
+  min-height: 250px;
+  padding: 28px;
+  z-index: 1;
+}
+
+.timeline-card b {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--teal), var(--blue));
+  box-shadow: 0 14px 28px rgba(37, 99, 235, 0.16);
+}
+
+.package-layout {
+  display: grid;
+  grid-template-columns: 0.88fr 1.12fr;
+  gap: 70px;
+  align-items: start;
+}
+
+.sticky-copy {
+  position: sticky;
+  top: 130px;
+}
+
+.feature-stack {
+  display: grid;
+  gap: 16px;
+  perspective: 900px;
+}
+
+.feature-card {
+  min-height: 180px;
+  padding: 30px;
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.feature-card:nth-child(even) {
+  transform: translateX(22px);
+}
+
+.feature-card:hover,
+.audience-card:hover,
+.value-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(15, 186, 165, 0.34);
+  box-shadow: 0 22px 60px rgba(34, 64, 94, 0.14);
+}
+
+.feature-card:nth-child(even):hover {
+  transform: translateX(22px) translateY(-6px);
+}
+
+.feature-card span {
+  color: var(--teal);
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.audience-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.audience-card {
+  min-height: 215px;
+  padding: 28px;
+}
+
+.audience-card:nth-child(1) { background: linear-gradient(145deg, #fff, #eefaf8); }
+.audience-card:nth-child(2) { background: linear-gradient(145deg, #fff, #eef5ff); }
+.audience-card:nth-child(3) { background: linear-gradient(145deg, #fff, #f4f1ff); }
+.audience-card:nth-child(4) { background: linear-gradient(145deg, #fff, #fff4ef); }
+
+.final-card {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 56px;
+  align-items: center;
+  padding: 48px;
+  background:
+    linear-gradient(135deg, rgba(15, 186, 165, 0.11), rgba(37, 99, 235, 0.09)),
+    #fff;
+}
+
+.contact-form {
+  display: grid;
+  gap: 14px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  color: var(--ink);
+  background: #fff;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input {
+  min-height: 56px;
+  padding: 0 18px;
+}
+
+select {
+  min-height: 56px;
+  padding: 0 18px;
+}
+
+textarea {
+  min-height: 130px;
+  padding: 18px;
+  resize: vertical;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: rgba(15, 186, 165, 0.68);
+  box-shadow: 0 0 0 4px rgba(15, 186, 165, 0.1);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #8392a5;
+}
+
+.contact-form button {
+  min-height: 60px;
+  border-radius: 14px;
+  font-size: 16px;
+  background: linear-gradient(135deg, var(--teal), var(--blue));
+}
+
+.contact-form button:disabled {
+  opacity: 0.75;
+  cursor: default;
+}
+
+.contact-form small {
+  color: #718196;
+  text-align: center;
+}
+
+.footer {
+  padding: 34px 0 42px;
+  border-top: 1px solid var(--line);
+  background: #fff;
+}
+
+.site-footer {
+  padding: 64px 0 26px;
+  background:
+    linear-gradient(135deg, rgba(15, 186, 165, 0.08), transparent 35%),
+    linear-gradient(225deg, rgba(37, 99, 235, 0.08), transparent 35%),
+    #fff;
+}
+
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.footer .brand {
+  padding-left: 0;
+}
+
+.footer p {
+  margin: 0;
+  color: var(--muted);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 0.72fr 0.9fr 0.8fr;
+  gap: 38px;
+}
+
+.footer-brand-block .brand {
+  padding-left: 0;
+}
+
+.footer-brand-block p {
+  max-width: 420px;
+  margin-top: 18px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.footer-column {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+}
+
+.footer-column h3 {
+  margin: 0 0 8px;
+  color: var(--ink);
+  font-size: 15px;
+}
+
+.footer-column a,
+.footer-column span {
+  color: #60728c;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.footer-column a:hover {
+  color: var(--blue);
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 46px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
+}
+
+.footer-bottom p {
+  color: #7b8ca0;
+  font-size: 13px;
+}
+
+.legal-page {
+  padding: 150px 0 90px;
+}
+
+.legal-card {
+  max-width: 900px;
+  padding: 42px;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+
+.legal-card h1 {
+  margin-bottom: 24px;
+  font-size: clamp(44px, 5vw, 72px);
+}
+
+.legal-card h2 {
+  margin-top: 34px;
+  margin-bottom: 10px;
+  font-size: 26px;
+}
+
+.legal-card p {
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.legal-card a {
+  color: var(--blue);
+  font-weight: 700;
+}
+
+.legal-card ul {
+  margin: 10px 0 20px;
+  padding-left: 22px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.legal-card li {
+  margin: 4px 0;
+}
+
+.deal-link {
+  width: fit-content;
+  margin-top: 18px;
+}
+
+.tools-section {
+  background:
+    linear-gradient(135deg, rgba(255, 107, 74, 0.08), transparent 28%),
+    linear-gradient(225deg, rgba(15, 186, 165, 0.1), transparent 34%),
+    #f7fbff;
+}
+
+.tools-showcase {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 18px;
+}
+
+.tool-card {
+  position: relative;
+  min-height: 280px;
+  overflow: hidden;
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  background: #fff;
+  box-shadow: 0 18px 50px rgba(34, 64, 94, 0.1);
+}
+
+.tool-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 5px;
+  background: linear-gradient(90deg, var(--teal), var(--blue), var(--violet), var(--coral));
+}
+
+.tool-card::after {
+  content: "";
+  position: absolute;
+  right: -46px;
+  bottom: -46px;
+  width: 150px;
+  height: 150px;
+  border: 1px solid rgba(37, 99, 235, 0.12);
+  border-radius: 36px;
+  transform: rotate(20deg);
+}
+
+.hero-tool {
+  grid-row: span 2;
+  min-height: 578px;
+  background:
+    linear-gradient(145deg, rgba(15, 186, 165, 0.1), rgba(37, 99, 235, 0.08)),
+    #fff;
+}
+
+.tools-showcase .tool-card:nth-child(4) {
+  grid-column: span 2;
+}
+
+.tool-rank {
+  display: grid;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--teal), var(--blue));
+  font-weight: 900;
+}
+
+.tool-card span {
+  display: block;
+  margin-top: 24px;
+  color: var(--teal);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.tool-card h3 {
+  margin: 12px 0 14px;
+  font-size: 28px;
+  line-height: 1.12;
+}
+
+.hero-tool h3 {
+  font-size: clamp(38px, 4vw, 58px);
+}
+
+.tool-card p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.tool-score {
+  margin-top: 42px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.tool-score strong {
+  display: block;
+  font-size: 62px;
+  line-height: 1;
+}
+
+.tool-score small {
+  display: block;
+  margin-top: 12px;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.mini-tools-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.mini-tools-grid article {
+  min-height: 170px;
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.82);
+  box-shadow: 0 14px 34px rgba(34, 64, 94, 0.08);
+}
+
+.mini-tools-grid b {
+  color: rgba(37, 99, 235, 0.55);
+  font-size: 24px;
+  font-weight: 900;
+}
+
+.mini-tools-grid h3 {
+  margin: 16px 0 8px;
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.mini-tools-grid p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.tool-workspace {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.86);
+  box-shadow: var(--shadow);
+}
+
+.tool-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  padding: 12px;
+  border-bottom: 1px solid var(--line);
+  background: #f7fbff;
+}
+
+.tool-tabs button {
+  min-height: 48px;
+  border: 1px solid transparent;
+  border-radius: 14px;
+  color: #52657d;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 850;
+}
+
+.tool-tabs button.active {
+  color: #fff;
+  background: linear-gradient(135deg, var(--teal), var(--blue));
+  box-shadow: 0 14px 28px rgba(37, 99, 235, 0.14);
+}
+
+.tool-panels {
+  padding: 24px;
+}
+
+.tool-panel {
+  display: none;
+  grid-template-columns: 1fr 0.86fr;
+  gap: 22px;
+}
+
+.tool-panel.active {
+  display: grid;
+}
+
+.tool-form,
+.tool-result {
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: #fff;
+}
+
+.tool-form span,
+.tool-result small {
+  display: block;
+  color: var(--teal);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.tool-form h3 {
+  margin: 12px 0 22px;
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.08;
+}
+
+.tool-form label {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 14px;
+  color: #42556d;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.tool-form textarea {
+  min-height: 104px;
+  margin: 0;
+}
+
+.tool-checks {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin: 12px 0 18px;
+}
+
+.tool-checks label {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  min-height: 48px;
+  margin: 0;
+  padding: 12px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #f8fcff;
+}
+
+.tool-checks input {
+  width: 18px;
+  min-height: 18px;
+  accent-color: var(--teal);
+}
+
+.tool-result {
+  background:
+    radial-gradient(circle at 90% 5%, rgba(37, 99, 235, 0.12), transparent 32%),
+    #fff;
+}
+
+.tool-result strong {
+  display: block;
+  margin: 12px 0 14px;
+  font-size: clamp(42px, 5vw, 70px);
+  line-height: 1;
+}
+
+.tool-result p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.tool-result ul {
+  margin: 18px 0 0;
+  padding-left: 20px;
+  color: #52657d;
+  line-height: 1.72;
+}
+
+.deal-page {
+  background:
+    radial-gradient(circle at 18% 0%, rgba(15, 186, 165, 0.12), transparent 32%),
+    radial-gradient(circle at 88% 10%, rgba(37, 99, 235, 0.12), transparent 30%),
+    #f7fafc;
+}
+
+.deal-hero {
+  padding: 150px 0 92px;
+}
+
+.deal-hero-layout {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 56px;
+  align-items: center;
+}
+
+.deal-hero h1 {
+  max-width: 820px;
+  font-size: clamp(48px, 5.6vw, 82px);
+}
+
+.deal-summary-card,
+.deal-step,
+.agreement-card {
+  border: 1px solid var(--line);
+  border-radius: 26px;
+  background: #fff;
+  box-shadow: var(--shadow);
+}
+
+.deal-summary-card {
+  padding: 34px;
+  background:
+    linear-gradient(135deg, rgba(15, 186, 165, 0.12), rgba(37, 99, 235, 0.08)),
+    #fff;
+}
+
+.deal-summary-card small {
+  color: var(--muted);
+  font-weight: 900;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.deal-summary-card strong {
+  display: block;
+  margin-top: 14px;
+  font-size: 48px;
+  line-height: 1;
+}
+
+.deal-summary-card p {
+  margin: 16px 0 0;
+  color: var(--muted);
+}
+
+.deal-status-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 28px;
+}
+
+.deal-status-row span {
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  color: #60728c;
+  background: rgba(255, 255, 255, 0.7);
+  font-size: 12px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.deal-status-row .active {
+  color: #fff;
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--teal), var(--blue));
+}
+
+.deal-form-section {
+  padding-top: 78px;
+}
+
+.deal-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(360px, 0.92fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.deal-form {
+  display: grid;
+  gap: 18px;
+}
+
+.deal-step {
+  padding: 30px;
+}
+
+.deal-step h2 {
+  margin-bottom: 22px;
+  font-size: clamp(28px, 3vw, 42px);
+}
+
+.deal-step label {
+  display: grid;
+  gap: 8px;
+  color: #42556d;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.deal-step textarea {
+  margin-top: 14px;
+}
+
+.terms-list {
+  display: grid;
+  gap: 12px;
+}
+
+.terms-list label {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #f8fcff;
+  color: var(--ink);
+  line-height: 1.45;
+}
+
+.terms-list input {
+  width: 18px;
+  min-height: 18px;
+  margin-top: 2px;
+  accent-color: var(--teal);
+}
+
+.signature-box {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background:
+    linear-gradient(rgba(37, 99, 235, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(37, 99, 235, 0.05) 1px, transparent 1px),
+    #fff;
+  background-size: 28px 28px;
+}
+
+#signatureCanvas {
+  display: block;
+  width: 100%;
+  height: 220px;
+  cursor: crosshair;
+  touch-action: none;
+}
+
+.signature-clear {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  min-height: 40px;
+  padding: 0 14px;
+  border-radius: 10px;
+}
+
+.deal-submit {
+  width: 100%;
+  margin-top: 18px;
+  background: linear-gradient(135deg, var(--teal), var(--blue));
+}
+
+.deal-form-status {
+  display: block;
+  margin-top: 12px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.agreement-card {
+  position: sticky;
+  top: 110px;
+  overflow: hidden;
+}
+
+.agreement-head {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  padding: 24px;
+  color: #fff;
+  background: linear-gradient(135deg, #111827, #243247);
+}
+
+.agreement-head img {
+  width: 54px;
+  height: 54px;
+  border-radius: 16px;
+}
+
+.agreement-head p {
+  margin: 0 0 6px;
+  color: #cbd5e1;
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.agreement-head strong {
+  font-size: 22px;
+}
+
+.agreement-body {
+  padding: 26px;
+}
+
+.agreement-body h2 {
+  font-size: 32px;
+}
+
+.agreement-body p {
+  color: var(--muted);
+  line-height: 1.68;
+}
+
+.agreement-body dl {
+  display: grid;
+  gap: 14px;
+  margin: 24px 0;
+}
+
+.agreement-body dt {
+  color: var(--teal);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.agreement-body dd {
+  margin: -8px 0 0;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--line);
+  color: #25364a;
+  line-height: 1.6;
+}
+
+.signature-preview {
+  min-height: 128px;
+  padding: 16px;
+  border: 1px dashed #b8c8d6;
+  border-radius: 16px;
+  background: #f8fcff;
+}
+
+.signature-preview span {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.signature-preview img {
+  display: none;
+  max-width: 100%;
+  max-height: 130px;
+}
+
+.agreement-actions {
+  padding: 0 26px 26px;
+}
+
+.agreement-actions .button {
+  width: 100%;
+}
+
+.reveal {
+  opacity: 1;
+  transform: translateY(0);
+  animation: softReveal 0.72s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.reveal:nth-child(2) { animation-delay: 0.06s; }
+.reveal:nth-child(3) { animation-delay: 0.12s; }
+.reveal:nth-child(4) { animation-delay: 0.18s; }
+.reveal:nth-child(5) { animation-delay: 0.24s; }
+
+@keyframes chipFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes rotate {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes meterFlow {
+  from { width: 66%; }
+  to { width: 92%; }
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes softReveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (max-width: 980px) {
+  .nav-shell {
+    grid-template-columns: 1fr auto;
+  }
+
+  .nav-shell nav {
+    display: none;
+  }
+
+  .hero-layout,
+  .barter-panel,
+  .deal-hero-layout,
+  .deal-layout,
+  .footer-grid,
+  .package-layout,
+  .final-card {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-console {
+    max-width: 620px;
+    margin: 0 auto;
+  }
+
+  .value-grid,
+  .timeline,
+  .deal-strip,
+  .tools-showcase,
+  .tool-panel,
+  .audience-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .mini-tools-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .tools-showcase .tool-card:nth-child(4) {
+    grid-column: auto;
+  }
+
+  .deal-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .deal-strip i {
+    display: none;
+  }
+
+  .sticky-copy {
+    position: static;
+  }
+
+  .agreement-card {
+    position: static;
+  }
+
+  .hero-layout {
+    padding-bottom: 70px;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    width: min(100% - 28px, 560px);
+  }
+
+  .nav-shell {
+    top: 12px;
+    width: calc(100% - 20px);
+    min-height: 64px;
+  }
+
+  .nav-cta {
+    display: none;
+  }
+
+  .brand {
+    padding-left: 16px;
+  }
+
+  .hero {
+    padding-top: 112px;
+  }
+
+  h1 {
+    font-size: 48px;
+  }
+
+  h2 {
+    font-size: 36px;
+  }
+
+  .hero-actions,
+  .footer-inner,
+  .footer-bottom {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-actions {
+    display: grid;
+  }
+
+  .signal-row,
+  .barter-panel,
+  .deal-hero-layout,
+  .deal-layout,
+  .tool-tabs,
+  .tool-panel,
+  .tool-checks,
+  .value-grid,
+  .timeline,
+  .deal-strip,
+  .tools-showcase,
+  .mini-tools-grid,
+  .audience-cards,
+  .form-row,
+  .code-strip {
+    grid-template-columns: 1fr;
+  }
+
+  .console-frame {
+    min-height: auto;
+  }
+
+  .console-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .metric-card.large {
+    grid-column: auto;
+  }
+
+  .floating-chip {
+    display: none;
+  }
+
+  .hero-copy::before,
+  .timeline::before,
+  .deal-strip i,
+  .marquee {
+    display: none;
+  }
+
+  .feature-card:nth-child(even),
+  .feature-card:nth-child(even):hover {
+    transform: none;
+  }
+
+  .section {
+    padding: 82px 0;
+  }
+
+  .barter-panel,
+  .deal-step,
+  .deal-summary-card,
+  .legal-card,
+  .final-card {
+    padding: 26px;
+  }
+}
+
+@media print {
+  body {
+    background: #fff !important;
+  }
+
+  .nav-shell,
+  .deal-hero,
+  .deal-form,
+  .agreement-actions,
+  script {
+    display: none !important;
+  }
+
+  .section,
+  .deal-form-section {
+    padding: 0 !important;
+  }
+
+  .container,
+  .deal-layout {
+    width: 100% !important;
+    display: block !important;
+    margin: 0 !important;
+  }
+
+  .agreement-card {
+    position: static !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+  }
+}
+
+</style>
+    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="89285dec-9784-489b-8771-eef1c647b0bb" data-blockingmode="auto" type="text/javascript"></script>
+  </head>
+  <body>
+    <div class="site-glow" aria-hidden="true"></div>
+
+    <header class="nav-shell">
+      <a class="brand" href="#top" aria-label="BarterWeb home">
+        <span class="brand-mark"><i></i></span>
+        <strong>Barter<span>Web</span></strong>
+      </a>
+      <nav aria-label="Hoofdnavigatie">
+        <a href="#barter">Barter</a>
+        <a href="#tools">Tools</a>
+        <a href="#model">Model</a>
+        <a href="#proces">Proces</a>
+        <a href="#pakket">Pakket</a>
+        <a href="#voor-wie">Voor wie</a>
+      </nav>
+      <a class="nav-cta" href="#aanvraag">Start aanvraag</a>
+    </header>
+
+    <main id="top">
+      <section class="hero section-grid">
+        <div class="container hero-layout">
+          <div class="hero-copy reveal">
+            <p class="kicker"><span></span> Geen factuur. Wel een digitale voorsprong.</p>
+            <h1>Premium websites gebouwd op <em>wederzijdse waarde.</em></h1>
+            <p class="hero-lead">
+              BarterWeb bouwt moderne websites, webshops en webapps voor ondernemers die willen
+              groeien zonder direct groot budget. Jij brengt expertise, diensten of netwerk in.
+              Wij bouwen jouw digitale groeisysteem.
+            </p>
+            <div class="hero-actions">
+              <a class="button primary" href="#aanvraag">Plan je samenwerking <span>&rarr;</span></a>
+              <a class="button ghost" href="#model">Bekijk het model</a>
+            </div>
+            <div class="signal-row" aria-label="Belangrijkste voordelen">
+              <div><strong>Barter</strong><span>waarde in plaats van cash</span></div>
+              <div><strong>1-2</strong><span>weken tot livegang</span></div>
+              <div><strong>100%</strong><span>maatwerk aanpak</span></div>
+            </div>
+          </div>
+
+          <div class="hero-console reveal" aria-label="Futuristische dashboard preview">
+            <div class="console-frame">
+              <div class="console-top">
+                <span></span><span></span><span></span>
+                <p>barterweb://value-engine</p>
+              </div>
+              <div class="console-grid">
+                <div class="metric-card large">
+                  <small>Collaboration value</small>
+                  <strong>Matched</strong>
+                  <div class="meter"><i></i></div>
+                </div>
+                <div class="orbit-ui">
+                  <div class="core">BW</div>
+                  <span class="ring r1"></span>
+                  <span class="ring r2"></span>
+                  <span class="node n1"></span>
+                  <span class="node n2"></span>
+                  <span class="node n3"></span>
+                </div>
+                <div class="metric-card">
+                  <small>Build speed</small>
+                  <strong>+64%</strong>
+                </div>
+                <div class="metric-card">
+                  <small>Stack</small>
+                  <strong>Next / React / AI</strong>
+                </div>
+              </div>
+              <div class="code-strip">
+                <span>waarde.match()</span>
+                <span>design.systeem</span>
+                <span>livegang.start</span>
+              </div>
+            </div>
+            <div class="floating-chip chip-a">Waarde &harr; Website</div>
+            <div class="floating-chip chip-b">AI-ready platform</div>
+            <div class="floating-chip chip-c">Performance first</div>
+          </div>
+        </div>
+        <div class="marquee" aria-hidden="true">
+          <div>
+            <span>Websites</span>
+            <span>Webshops</span>
+            <span>Webapps</span>
+            <span>AI flows</span>
+            <span>SEO</span>
+            <span>Performance</span>
+            <span>Barter deals</span>
+            <span>Growth systems</span>
+            <span>Websites</span>
+            <span>Webshops</span>
+            <span>Webapps</span>
+            <span>AI flows</span>
+            <span>SEO</span>
+            <span>Performance</span>
+            <span>Barter deals</span>
+            <span>Growth systems</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="barter" class="section barter-section">
+        <div class="container barter-panel reveal">
+          <div>
+            <p class="eyebrow">Wat betekent barter?</p>
+            <h2>Ruil waarde voor een professioneel digitaal platform.</h2>
+          </div>
+          <div class="barter-copy">
+            <p>
+              Barter betekent dat je niet betaalt met een standaard factuur, maar met iets dat
+              echte waarde heeft voor beide partijen. Dat kan jouw expertise zijn, een dienst,
+              marketingkracht, content, toegang tot een netwerk, producten, leads of een andere
+              concrete bijdrage.
+            </p>
+            <p>
+              Bij BarterWeb maken we vooraf helder wat jij inbrengt en wat wij bouwen. Zo ontstaat
+              een samenwerking zonder onduidelijkheid: jij krijgt een professioneel platform, wij
+              ontvangen waarde die ons bedrijf verder helpt.
+            </p>
+          </div>
+          <div class="barter-examples" aria-label="Voorbeelden van barterwaarde">
+            <span>Expertise</span>
+            <span>Marketing</span>
+            <span>Netwerk</span>
+            <span>Content</span>
+            <span>Diensten</span>
+            <span>Leads</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="tools" class="section tools-section section-grid">
+        <div class="container section-head">
+          <p class="eyebrow">Gratis tools</p>
+          <h2>Check direct waar je bedrijf online sterker kan worden.</h2>
+          <p>
+            Werkende tools, geen losse ideeen. Vul je gegevens in en krijg meteen een score,
+            advies of prijsindicatie die je kunt gebruiken voor je volgende stap.
+          </p>
+        </div>
+
+        <div class="container tool-workspace reveal">
+          <div class="tool-tabs" role="tablist" aria-label="Gratis BarterWeb tools">
+            <button class="active" type="button" data-tool="scan">Website Scan</button>
+            <button type="button" data-tool="deal">Deal Calculator</button>
+            <button type="button" data-tool="cost">Kosten Calculator</button>
+            <button type="button" data-tool="bio">Social Bio</button>
+          </div>
+
+          <div class="tool-panels">
+            <article class="tool-panel active" data-panel="scan">
+              <div class="tool-form">
+                <span>Website Scan</span>
+                <h3>Hoe modern is je huidige website?</h3>
+                <label>Website URL <input id="scanUrl" type="url" placeholder="https://jouwbedrijf.nl" /></label>
+                <div class="tool-checks">
+                  <label><input id="scanMobile" type="checkbox" checked /> Mobielvriendelijk</label>
+                  <label><input id="scanHttps" type="checkbox" checked /> HTTPS actief</label>
+                  <label><input id="scanCta" type="checkbox" /> Duidelijke CTA</label>
+                  <label><input id="scanSeo" type="checkbox" /> SEO basis op orde</label>
+                  <label><input id="scanFast" type="checkbox" /> Laadt snel</label>
+                </div>
+                <button class="button primary" type="button" id="runWebsiteScan">Scan website</button>
+              </div>
+              <div class="tool-result">
+                <small>BarterWeb Score</small>
+                <strong id="scanScore">64/100</strong>
+                <p id="scanFeedback">Je website heeft een redelijke basis, maar mist waarschijnlijk conversie, snelheid of moderne uitstraling.</p>
+                <ul id="scanTips">
+                  <li>Maak de hoofdactie direct zichtbaar.</li>
+                  <li>Verbeter mobiele leesbaarheid en snelheid.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="tool-panel" data-panel="deal">
+              <div class="tool-form">
+                <span>Deal Calculator</span>
+                <h3>Is je barterdeal eerlijk?</h3>
+                <label>Wat wil je ontvangen? <textarea id="toolWanted" placeholder="Bijv. webshop met betaalpagina"></textarea></label>
+                <label>Wat bied je aan? <textarea id="toolOffered" placeholder="Bijv. detailing van 3 auto's"></textarea></label>
+                <button class="button primary" type="button" id="runToolDeal">Bereken deal</button>
+              </div>
+              <div class="tool-result">
+                <small>Deal Score</small>
+                <strong id="toolDealScore">82/100</strong>
+                <p id="toolDealFeedback">Deze deal lijkt redelijk in balans. Maak scope en levermomenten concreet.</p>
+                <ul id="toolDealTips">
+                  <li>Leg vast wat exact geleverd wordt.</li>
+                  <li>Vraag bewijs van marktwaarde waar nodig.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="tool-panel" data-panel="cost">
+              <div class="tool-form">
+                <span>Kosten Calculator</span>
+                <h3>Wat is je digitale project ongeveer waard?</h3>
+                <div class="tool-checks">
+                  <label><input class="cost-option" type="checkbox" value="850" checked /> Website</label>
+                  <label><input class="cost-option" type="checkbox" value="1400" /> Webshop</label>
+                  <label><input class="cost-option" type="checkbox" value="950" /> Reserveringssysteem</label>
+                  <label><input class="cost-option" type="checkbox" value="550" /> Branding</label>
+                  <label><input class="cost-option" type="checkbox" value="450" /> SEO</label>
+                  <label><input class="cost-option" type="checkbox" value="350" /> Onderhoud</label>
+                </div>
+                <button class="button primary" type="button" id="runCostCalc">Bereken waarde</button>
+              </div>
+              <div class="tool-result">
+                <small>Geschatte projectwaarde</small>
+                <strong id="costValue">EUR 700 - EUR 1.050</strong>
+                <p id="costFeedback">Ook mogelijk via slimme samenwerking of barterdeal.</p>
+                <ul>
+                  <li>Gebruik dit als startpunt, niet als definitieve offerte.</li>
+                  <li>Scope en snelheid bepalen de uiteindelijke waarde.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="tool-panel" data-panel="bio">
+              <div class="tool-form">
+                <span>Social Bio Generator</span>
+                <h3>Maak je bedrijf direct scherper online.</h3>
+                <label>Bedrijfsnaam <input id="bioName" type="text" placeholder="Bijv. Glow Detailing" /></label>
+                <label>Wat doe je? <input id="bioOffer" type="text" placeholder="Bijv. premium autodetailing in Rotterdam" /></label>
+                <label>Stijl
+                  <select id="bioTone">
+                    <option value="professioneel">Professioneel</option>
+                    <option value="lokaal">Lokaal en persoonlijk</option>
+                    <option value="premium">Premium</option>
+                  </select>
+                </label>
+                <button class="button primary" type="button" id="runBioGen">Genereer bio</button>
+              </div>
+              <div class="tool-result">
+                <small>Nieuwe bio</small>
+                <strong id="bioHeadline">Klaar voor meer klanten?</strong>
+                <p id="bioText">Vul je bedrijfsnaam en aanbod in om direct een betere social bio te maken.</p>
+                <ul id="bioVariants">
+                  <li>Tip: sluit af met een duidelijke actie zoals "Plan je afspraak".</li>
+                </ul>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="model" class="section model-section">
+        <div class="container section-head">
+          <p class="eyebrow">Het nieuwe bouwmodel</p>
+          <h2>Geen traditioneel prijskaartje. Wel een scherpe deal.</h2>
+          <p>
+            We koppelen jouw waarde aan onze technische uitvoering. Zo ontstaat een samenwerking
+            die eerlijk voelt, concreet is en direct richting groei beweegt.
+          </p>
+        </div>
+        <div class="container value-grid">
+          <article class="value-card featured reveal">
+            <span>01</span>
+            <h3>Jij brengt waarde in</h3>
+            <p>
+              Denk aan marketing, content, netwerk, specialistische kennis, diensten, voorraad,
+              leads of een andere concrete bijdrage die BarterWeb sterker maakt.
+            </p>
+          </article>
+          <article class="value-card reveal">
+            <span>02</span>
+            <h3>Wij ontwerpen het platform</h3>
+            <p>
+              Van merkgevoel tot conversieflow: we zetten jouw aanbod om naar een digitale
+              ervaring die professioneel voelt en vertrouwen wekt.
+            </p>
+          </article>
+          <article class="value-card reveal">
+            <span>03</span>
+            <h3>We bouwen door na livegang</h3>
+            <p>
+              Geen eenmalige oplevering die daarna stilvalt. Updates, optimalisaties en slimme
+              uitbreidingen blijven onderdeel van de samenwerking.
+            </p>
+          </article>
+        </div>
+        <div class="container deal-strip reveal" aria-label="Hoe een barterdeal werkt">
+          <div><strong>Jouw waarde</strong><span>expertise, netwerk, diensten of assets</span></div>
+          <i></i>
+          <div><strong>Heldere afspraken</strong><span>concreet, meetbaar en eerlijk vastgelegd</span></div>
+          <i></i>
+          <div><strong>Digitaal resultaat</strong><span>website, shop of platform dat kan groeien</span></div>
+        </div>
+      </section>
+
+      <section id="proces" class="section process-section section-grid">
+        <div class="container section-head center">
+          <p class="eyebrow">Van idee naar live platform</p>
+          <h2>Een helder proces zonder ruis.</h2>
+        </div>
+        <div class="container timeline">
+          <article class="timeline-card reveal">
+            <b>01</b>
+            <h3>Aanvraag</h3>
+            <p>Je vertelt wat je wilt bouwen en welke waarde jij kunt inbrengen.</p>
+          </article>
+          <article class="timeline-card reveal">
+            <b>02</b>
+            <h3>Match</h3>
+            <p>We bepalen samen of de samenwerking logisch, eerlijk en haalbaar is.</p>
+          </article>
+          <article class="timeline-card reveal">
+            <b>03</b>
+            <h3>Blueprint</h3>
+            <p>We maken de structuur, stijlrichting, functionaliteiten en planning concreet.</p>
+          </article>
+          <article class="timeline-card reveal">
+            <b>04</b>
+            <h3>Launch</h3>
+            <p>Design, development, testing, livegang en optimalisatie komen samen.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="pakket" class="section package-section">
+        <div class="container package-layout">
+          <div class="sticky-copy reveal">
+            <p class="eyebrow">Alles inbegrepen</p>
+            <h2>Een compleet digitaal systeem, niet alleen een mooie pagina.</h2>
+            <p>
+              Je krijgt de onderdelen die nodig zijn om professioneel te starten, sneller te
+              laden, beter gevonden te worden en bezoekers richting actie te bewegen.
+            </p>
+          </div>
+          <div class="feature-stack">
+            <article class="feature-card reveal"><span>Design</span><h3>Premium interface</h3><p>Een maatwerk uitstraling met sterke typografie, micro-interacties en conversiegerichte secties.</p></article>
+            <article class="feature-card reveal"><span>Code</span><h3>Moderne frontend</h3><p>Strakke, onderhoudbare code die later makkelijk naar React of Next.js kan worden gebracht.</p></article>
+            <article class="feature-card reveal"><span>AI</span><h3>Slimme uitbreidingen</h3><p>Chatbots, automatiseringen en leadflows kunnen direct in de architectuur worden meegenomen.</p></article>
+            <article class="feature-card reveal"><span>SEO</span><h3>Vindbaarheid & snelheid</h3><p>Semantische opbouw, snelle assets, responsive layout en content die logisch is opgebouwd.</p></article>
+            <article class="feature-card reveal"><span>Care</span><h3>Doorontwikkeling</h3><p>Na livegang blijven we meten, verbeteren en uitbreiden op basis van echte bedrijfsdoelen.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="voor-wie" class="section audience-section section-grid">
+        <div class="container section-head">
+          <p class="eyebrow">Voor wie</p>
+          <h2>Gebouwd voor ondernemers die sneller professioneel willen worden.</h2>
+        </div>
+        <div class="container audience-cards">
+          <article class="audience-card reveal">
+            <h3>Startups</h3>
+            <p>Lanceer je MVP of eerste merkwebsite zonder grote upfront investering.</p>
+          </article>
+          <article class="audience-card reveal">
+            <h3>Lokale bedrijven</h3>
+            <p>Maak je online aanwezigheid sterker, betrouwbaarder en beter vindbaar.</p>
+          </article>
+          <article class="audience-card reveal">
+            <h3>Webshops</h3>
+            <p>Zet producten, betalingen en conversieflows neer in een schaalbare basis.</p>
+          </article>
+          <article class="audience-card reveal">
+            <h3>Experts</h3>
+            <p>Verpak je kennis, aanbod of methode in een platform dat autoriteit uitstraalt.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="aanvraag" class="section final-section">
+        <div class="container final-card reveal">
+          <div>
+            <p class="eyebrow">Klaar om te bouwen?</p>
+            <h2>Vertel wat jij wilt maken en welke waarde jij kunt ruilen.</h2>
+            <p>
+              Geen verkooppraatje. Gewoon een concrete intake om te zien of we een sterke deal
+              kunnen bouwen.
+            </p>
+            <a class="button ghost deal-link" href="./deal-bevestiging.html">Deal bevestigen <span>&rarr;</span></a>
+          </div>
+          <form class="contact-form">
+            <div class="form-row">
+              <input type="text" name="name" placeholder="Jouw naam" aria-label="Jouw naam" required />
+              <input type="email" name="email" placeholder="E-mailadres" aria-label="E-mailadres" required />
+            </div>
+            <input type="text" name="project_type" placeholder="Wat wil je laten bouwen?" aria-label="Projecttype" required />
+            <textarea name="message" placeholder="Welke waarde kun jij inbrengen als samenwerking?" aria-label="Samenwerkingswaarde" required></textarea>
+            <input type="hidden" name="website_url" value="https://barterweb.nl" />
+            <input type="hidden" name="logo_url" value="https://barterweb.nl/barterweb-logo.svg" />
+            <button type="submit">Start mijn aanvraag <span>&rarr;</span></button>
+            <small class="form-status">Reactie binnen 24 uur. Geen verplichtingen.</small>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer site-footer">
+      <div class="container footer-grid">
+        <div class="footer-brand-block">
+          <a class="brand" href="#top">
+            <span class="brand-mark"><i></i></span>
+            <strong>Barter<span>Web</span></strong>
+          </a>
+          <p>
+            Premium websites, webshops en webapps gebouwd op wederzijdse waarde.
+            Geen standaard factuur, wel heldere afspraken.
+          </p>
+        </div>
+        <div class="footer-column">
+          <h3>Website</h3>
+          <a href="#barter">Wat is barter?</a>
+          <a href="#tools">Gratis tools</a>
+          <a href="#model">Model</a>
+          <a href="#proces">Proces</a>
+          <a href="#pakket">Pakket</a>
+        </div>
+        <div class="footer-column">
+          <h3>Regelen</h3>
+          <a href="#aanvraag">Aanvraag starten</a>
+          <a href="./deal-bevestiging.html">Dealbevestiging</a>
+          <a href="./algemene-voorwaarden.html">Algemene voorwaarden</a>
+          <a href="./privacyverklaring.html">Privacyverklaring</a>
+        </div>
+        <div class="footer-column">
+          <h3>Contact</h3>
+          <a href="mailto:info.barterweb@gmail.com">info@barterweb.nl</a>
+          <a href="https://barterweb.nl">barterweb.nl</a>
+          <span>Reactie binnen 24 uur</span>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <p>&copy; 2026 BarterWeb. Alle rechten voorbehouden.</p>
+        <p>Value-first collaborations.</p>
+      </div>
+    </footer>
+
+    <script>
+      window.chatbaseConfig = {
+        chatbotId: "8AVwRonCy70UfeElwpr2d",
+      };
+    </script>
+    <script
+      src="https://www.chatbase.co/embed.min.js"
+      id="8AVwRonCy70UfeElwpr2d"
+      defer>
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+document.querySelectorAll('a[href^="#"]').forEach((link) => {
+  link.addEventListener("click", (event) => {
+    const id = link.getAttribute("href");
+    if (!id || id === "#") return;
+    const target = document.querySelector(id);
+    if (!target) return;
+    event.preventDefault();
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+});
+
+const form = document.querySelector(".contact-form");
+
+if (form) {
+  const status = form.querySelector(".form-status");
+  const submitButton = form.querySelector("button");
+  const originalButtonText = submitButton ? submitButton.innerHTML : "";
+
+  if (window.emailjs) {
+    emailjs.init({
+      publicKey: "M5obhqMfQPx6qKQ9c",
+    });
+  }
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    if (!window.emailjs) {
+      if (status) status.textContent = "EmailJS kon niet laden. Controleer je internetverbinding en probeer opnieuw.";
+      return;
+    }
+
+    if (submitButton) {
+      submitButton.innerHTML = "Aanvraag verzenden...";
+      submitButton.disabled = true;
+    }
+
+    if (status) {
+      status.textContent = "Je aanvraag wordt veilig verzonden.";
+    }
+
+    try {
+      await emailjs.sendForm("service_8hgaglq", "template_0p71lv2", form);
+      form.reset();
+      if (submitButton) submitButton.innerHTML = "Aanvraag verzonden";
+      if (status) status.textContent = "Gelukt. Je ontvangt zo een bevestiging per e-mail.";
+      setTimeout(() => {
+        if (submitButton) {
+          submitButton.innerHTML = originalButtonText;
+          submitButton.disabled = false;
+        }
+        if (status) status.textContent = "Reactie binnen 24 uur. Geen verplichtingen.";
+      }, 3200);
+    } catch (error) {
+      console.error("EmailJS error:", error);
+      if (submitButton) {
+        submitButton.innerHTML = originalButtonText;
+        submitButton.disabled = false;
+      }
+      if (status) status.textContent = "Verzenden is niet gelukt. Controleer de gegevens en probeer opnieuw.";
+    }
+  });
+}
+
+const serviceProfiles = [
+  { keys: ["webshop", "ecommerce", "e-commerce", "shop"], value: [1200, 1800], hours: [18, 25], label: "Webshop" },
+  { keys: ["reservering", "booking", "afspraak"], value: [950, 1500], hours: [14, 22], label: "Reserveringssysteem" },
+  { keys: ["website", "one-page", "landingspagina", "landing"], value: [650, 1100], hours: [8, 16], label: "Website" },
+  { keys: ["branding", "logo", "huisstijl"], value: [500, 900], hours: [7, 12], label: "Branding" },
+  { keys: ["seo", "vindbaarheid"], value: [450, 850], hours: [6, 10], label: "SEO optimalisatie" },
+  { keys: ["dashboard", "webapp", "platform", "app"], value: [1500, 2800], hours: [24, 42], label: "Webapp / platform" },
+];
+
+const tradeProfiles = [
+  { keys: ["detailing", "auto detail", "lakcorrectie"], value: [800, 1400], hours: [12, 16], label: "Detailing" },
+  { keys: ["fotografie", "foto", "shoot"], value: [600, 1200], hours: [6, 12], label: "Fotografie" },
+  { keys: ["video", "videografie", "drone"], value: [1200, 1700], hours: [10, 18], label: "Videografie" },
+  { keys: ["scooter", "vespa", "brommer"], value: [700, 1600], hours: null, label: "Scooter / voertuig" },
+  { keys: ["tattoo", "tattooage"], value: [500, 1000], hours: [4, 8], label: "Tattoo sessie" },
+  { keys: ["product", "pakket", "voorraad"], value: [400, 1100], hours: null, label: "Productpakket" },
+  { keys: ["marketing", "social", "advertentie", "ads"], value: [650, 1300], hours: [8, 18], label: "Marketingdienst" },
+  { keys: ["coach", "advies", "consulting", "training"], value: [500, 1200], hours: [5, 12], label: "Advies / coaching" },
+];
+
+function findProfile(text, profiles, fallback) {
+  const normalized = text.toLowerCase();
+  return profiles.find((profile) => profile.keys.some((key) => normalized.includes(key))) || fallback;
+}
+
+const toolTabs = document.querySelectorAll(".tool-tabs button");
+const toolPanels = document.querySelectorAll(".tool-panel");
+
+toolTabs.forEach((tab) => {
+  tab.addEventListener("click", () => {
+    const tool = tab.dataset.tool;
+    toolTabs.forEach((item) => item.classList.toggle("active", item === tab));
+    toolPanels.forEach((panel) => panel.classList.toggle("active", panel.dataset.panel === tool));
+  });
+});
+
+function setList(selector, items) {
+  const element = document.querySelector(selector);
+  if (!element) return;
+  element.innerHTML = items.map((item) => `<li>${item}</li>`).join("");
+}
+
+const websiteScanButton = document.querySelector("#runWebsiteScan");
+
+if (websiteScanButton) {
+  websiteScanButton.addEventListener("click", () => {
+    const url = document.querySelector("#scanUrl").value.trim();
+    const checks = [
+      ["#scanMobile", 18, "Maak de website beter bruikbaar op mobiel."],
+      ["#scanHttps", 14, "Zorg dat HTTPS correct actief is."],
+      ["#scanCta", 18, "Plaats een duidelijke actie bovenaan de pagina."],
+      ["#scanSeo", 16, "Verbeter titels, meta description en kopstructuur."],
+      ["#scanFast", 18, "Optimaliseer afbeeldingen en laadsnelheid."],
+    ];
+    let score = url ? 18 : 8;
+    const tips = [];
+
+    checks.forEach(([selector, points, tip]) => {
+      if (document.querySelector(selector).checked) score += points;
+      else tips.push(tip);
+    });
+
+    score = Math.min(100, score);
+    document.querySelector("#scanScore").textContent = `${score}/100`;
+    document.querySelector("#scanFeedback").textContent =
+      score >= 82
+        ? "Sterke basis. De grootste winst zit waarschijnlijk in conversie, content en vertrouwen."
+        : score >= 62
+          ? "Redelijke basis, maar er liggen duidelijke kansen om moderner, sneller en overtuigender te worden."
+          : "Deze website loopt waarschijnlijk omzet mis door techniek, uitstraling of onduidelijke acties.";
+    setList("#scanTips", tips.length ? tips.slice(0, 3) : ["Voeg social proof toe.", "Test je belangrijkste CTA.", "Houd de snelheid scherp."]);
+  });
+}
+
+const toolDealButton = document.querySelector("#runToolDeal");
+
+if (toolDealButton) {
+  toolDealButton.addEventListener("click", () => {
+    const wanted = document.querySelector("#toolWanted").value.trim();
+    const offered = document.querySelector("#toolOffered").value.trim();
+
+    if (!wanted || !offered) {
+      document.querySelector("#toolDealFeedback").textContent = "Vul eerst in wat je wilt ontvangen en wat je aanbiedt.";
+      return;
+    }
+
+    const result = localDealAnalysis(wanted, offered, "");
+    document.querySelector("#toolDealScore").textContent = `${result.score}/100`;
+    document.querySelector("#toolDealFeedback").textContent = result.feedback;
+    setList("#toolDealTips", [...result.suggestions, ...result.risks].slice(0, 4));
+  });
+}
+
+const costButton = document.querySelector("#runCostCalc");
+
+if (costButton) {
+  costButton.addEventListener("click", () => {
+    const selected = [...document.querySelectorAll(".cost-option:checked")].map((item) => Number(item.value));
+    const base = selected.reduce((sum, value) => sum + value, 0) || 650;
+    const low = Math.round(base * 0.82 / 50) * 50;
+    const high = Math.round(base * 1.24 / 50) * 50;
+    document.querySelector("#costValue").textContent = `EUR ${low.toLocaleString("nl-NL")} - EUR ${high.toLocaleString("nl-NL")}`;
+    document.querySelector("#costFeedback").textContent =
+      base > 2200
+        ? "Dit is een groter project. Een barterdeal kan nog steeds, maar duidelijke fases zijn verstandig."
+        : "Dit project is geschikt om als slimme barterdeal of compacte samenwerking te bespreken.";
+  });
+}
+
+const bioButton = document.querySelector("#runBioGen");
+
+if (bioButton) {
+  bioButton.addEventListener("click", () => {
+    const name = document.querySelector("#bioName").value.trim() || "Jouw bedrijf";
+    const offer = document.querySelector("#bioOffer").value.trim() || "helpt klanten met betere resultaten";
+    const tone = document.querySelector("#bioTone").value;
+    const openings = {
+      professioneel: `${name} | ${offer}`,
+      lokaal: `${name} helpt klanten in de regio met ${offer.toLowerCase()}`,
+      premium: `${name} - premium service voor ondernemers die kwaliteit willen`,
+    };
+    const variants = {
+      professioneel: ["Sterke service. Heldere afspraken. Resultaatgericht.", "Stuur een bericht voor beschikbaarheid of samenwerking."],
+      lokaal: ["Persoonlijk, dichtbij en zonder gedoe.", "Plan vandaag nog je kennismaking."],
+      premium: ["Voor klanten die geen standaard oplossing zoeken.", "Vraag een intake aan en ontdek wat mogelijk is."],
+    };
+    document.querySelector("#bioHeadline").textContent = openings[tone];
+    document.querySelector("#bioText").textContent = `${offer}. Betrouwbaar, helder en gebouwd rond resultaat.`;
+    setList("#bioVariants", variants[tone]);
+  });
+}
+
+function formatRange(range) {
+  return `EUR ${range[0].toLocaleString("nl-NL")} - EUR ${range[1].toLocaleString("nl-NL")}`;
+}
+
+function formatHours(range) {
+  if (!range) return "waarde afhankelijk van staat en bewijs";
+  return `${range[0]} - ${range[1]} uur inzet`;
+}
+
+function midpoint(range) {
+  return (range[0] + range[1]) / 2;
+}
+
+function localDealAnalysis(wantedText, offeredText, contextText) {
+  const wanted = findProfile(wantedText, serviceProfiles, {
+    value: [700, 1400],
+    hours: [10, 20],
+    label: "Digitale dienst",
+  });
+  const offered = findProfile(offeredText, tradeProfiles, {
+    value: [450, 1000],
+    hours: [5, 14],
+    label: "Tegenprestatie",
+  });
+
+  const ratio = midpoint(offered.value) / midpoint(wanted.value);
+  const score = Math.max(42, Math.min(94, Math.round(100 - Math.abs(1 - ratio) * 72)));
+  const context = contextText.toLowerCase();
+  const hasProof = ["factuur", "portfolio", "reviews", "bewijs", "foto", "bon", "ervaring"].some((word) =>
+    context.includes(word)
+  );
+  const adjustedScore = hasProof ? Math.min(98, score + 4) : score;
+
+  let label = "Goede deal";
+  let feedback = "Deze barter deal lijkt redelijk goed in balans. Maak scope, kwaliteit en levermomenten concreet voordat beide partijen akkoord geven.";
+  const suggestions = ["Leg precies vast wat BarterWeb oplevert.", "Spreek leverdatum en acceptatiemoment af."];
+  const risks = ["Waarde blijft een inschatting zonder bewijs of referenties."];
+
+  if (adjustedScore >= 88) {
+    label = "Zeer eerlijke deal";
+    feedback = "Deze deal lijkt sterk in balans. De marktwaarde en verwachte inzet liggen dicht bij elkaar.";
+    suggestions.push("Gebruik de dealbevestiging om deze afspraken direct vast te leggen.");
+  } else if (adjustedScore < 62) {
+    label = "Onevenwichtig";
+    feedback = "Deze deal lijkt mogelijk scheef. Overweeg een kleinere scope, extra tegenprestatie of gedeeltelijke bijbetaling.";
+    suggestions.push("Maak een light-versie van de gevraagde dienst.");
+    risks.push("Een van de prestaties lijkt duidelijk lager gewaardeerd dan de andere.");
+  } else if (adjustedScore < 78) {
+    label = "Redelijk gebalanceerd";
+    feedback = "Deze deal kan werken, maar vraagt om scherpe afspraken. Zorg dat extra werk buiten de deal apart wordt bevestigd.";
+    suggestions.push("Beperk onderhoud of extra revisies als de tegenprestatie lager uitvalt.");
+  }
+
+  if (!hasProof) {
+    suggestions.push("Vraag om foto's, portfolio, reviews of aankoopbewijs als onderbouwing.");
+  }
+
+  if (offered.hours === null) {
+    risks.push("Bij productdeals hangt waarde sterk af van staat, leeftijd en overdraagbaarheid.");
+  }
+
+  return {
+    score: adjustedScore,
+    label,
+    wantedValue: formatRange(wanted.value),
+    offeredValue: formatRange(offered.value),
+    wantedHours: formatHours(wanted.hours),
+    offeredHours: formatHours(offered.hours),
+    feedback,
+    suggestions: suggestions.slice(0, 3),
+    risks: risks.slice(0, 3),
+  };
+}
+
+</script>
+  </body>
+</html>

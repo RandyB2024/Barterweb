@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dealbevestiging - BarterWeb</title>
+    <meta
+      name="description"
+      content="Leg een BarterWeb deal vast met deal-ID, voorwaarden, digitale handtekening en PDF-overeenkomst."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="89285dec-9784-489b-8771-eef1c647b0bb" data-blockingmode="auto" type="text/javascript"></script>
+  </head>
+  <body class="deal-page">
+    <header class="nav-shell">
+      <a class="brand" href="./index.html" aria-label="BarterWeb home">
+        <span class="brand-mark"><i></i></span>
+        <strong>Barter<span>Web</span></strong>
+      </a>
+      <nav aria-label="Hoofdnavigatie">
+        <a href="./index.html#barter">Barter</a>
+        <a href="./index.html#proces">Proces</a>
+        <a href="./index.html#pakket">Pakket</a>
+      </nav>
+      <a class="nav-cta" href="#deal-form">Start deal</a>
+    </header>
+
+    <main>
+      <section class="deal-hero section-grid">
+        <div class="container deal-hero-layout">
+          <div>
+            <p class="kicker"><span></span> Slimme dealbevestiging</p>
+            <h1>Leg je barterdeal helder vast voordat we bouwen.</h1>
+            <p class="hero-lead">
+              Maak een duidelijke overeenkomst met deal-ID, waarde, levertermijnen,
+              voorwaarden en digitale handtekening. Rust in je hoofd, strak op papier.
+            </p>
+          </div>
+          <aside class="deal-summary-card">
+            <small>Status</small>
+            <strong>Concept</strong>
+            <p id="deal-id-preview">Deal-ID wordt automatisch gegenereerd</p>
+            <div class="deal-status-row">
+              <span class="active">Concept</span>
+              <span>Akkoord</span>
+              <span>Geleverd</span>
+              <span>Afgerond</span>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="section deal-form-section" id="deal-form">
+        <div class="container deal-layout">
+          <form class="deal-form" id="barterDealForm">
+            <input type="hidden" name="deal_id" id="dealIdInput" />
+            <input type="hidden" name="signature_data" id="signatureData" />
+            <input type="hidden" name="status" value="concept" />
+
+            <div class="deal-step">
+              <p class="eyebrow">Stap 1</p>
+              <h2>Jouw gegevens</h2>
+              <div class="form-row">
+                <input name="customer_name" type="text" placeholder="Naam" required />
+                <input name="company_name" type="text" placeholder="Bedrijfsnaam" />
+              </div>
+              <div class="form-row">
+                <input name="customer_email" type="email" placeholder="E-mail" required />
+                <input name="customer_phone" type="tel" placeholder="Telefoon" required />
+              </div>
+            </div>
+
+            <div class="deal-step">
+              <p class="eyebrow">Stap 2</p>
+              <h2>Wat bouwt BarterWeb?</h2>
+              <select name="barterweb_deliverable" required>
+                <option value="">Kies een dienst</option>
+                <option>One-page website</option>
+                <option>Websitepakket</option>
+                <option>Webshop</option>
+                <option>Reserveringssysteem</option>
+                <option>Logo & huisstijl</option>
+                <option>Onderhoud & updates</option>
+                <option>Anders</option>
+              </select>
+              <textarea name="barterweb_scope" placeholder="Omschrijf kort wat BarterWeb oplevert..." required></textarea>
+            </div>
+
+            <div class="deal-step">
+              <p class="eyebrow">Stap 3</p>
+              <h2>Wat ruilt de klant?</h2>
+              <input name="customer_trade" type="text" placeholder="Bijv. een dienst, detailing, productpakket..." required />
+              <textarea name="customer_trade_details" placeholder="Omschrijf de tegenprestatie zo concreet mogelijk..." required></textarea>
+            </div>
+
+            <div class="deal-step">
+              <p class="eyebrow">Stap 4</p>
+              <h2>Dealwaarde</h2>
+              <div class="form-row">
+                <input name="barterweb_value" type="text" placeholder="Waarde BarterWeb, bijv. EUR 750" required />
+                <input name="customer_value" type="text" placeholder="Waarde tegenprestatie, bijv. EUR 750" required />
+              </div>
+            </div>
+
+            <div class="deal-step">
+              <p class="eyebrow">Stap 5</p>
+              <h2>Levertermijn</h2>
+              <div class="form-row">
+                <label>
+                  BarterWeb levert uiterlijk
+                  <input name="barterweb_delivery_date" type="date" required />
+                </label>
+                <label>
+                  Klant levert uiterlijk
+                  <input name="customer_delivery_date" type="date" required />
+                </label>
+              </div>
+            </div>
+
+            <div class="deal-step">
+              <p class="eyebrow">Stap 6</p>
+              <h2>Voorwaarden</h2>
+              <div class="terms-list">
+                <label><input type="checkbox" required /> Deal is pas geldig na akkoord van beide partijen.</label>
+                <label><input type="checkbox" required /> Beide partijen leveren volgens afspraak.</label>
+                <label><input type="checkbox" required /> Extra werk valt buiten deze deal en wordt apart bevestigd.</label>
+                <label><input type="checkbox" required /> Bij niet leveren mag de deal worden geannuleerd.</label>
+                <label><input type="checkbox" required /> BarterWeb mag het project als portfolio gebruiken.</label>
+              </div>
+            </div>
+
+            <div class="deal-step">
+              <p class="eyebrow">Stap 7</p>
+              <h2>Digitaal ondertekenen</h2>
+              <div class="signature-box">
+                <canvas id="signatureCanvas" width="900" height="260" aria-label="Handtekeningveld"></canvas>
+                <button class="button ghost signature-clear" type="button" id="clearSignature">Wis handtekening</button>
+              </div>
+              <button class="button primary deal-submit" type="submit">Deal bevestiging maken <span>&rarr;</span></button>
+              <small class="deal-form-status">Na bevestigen kun je de overeenkomst downloaden als PDF.</small>
+            </div>
+          </form>
+
+          <aside class="agreement-card" id="agreement">
+            <div class="agreement-head">
+              <img src="./barterweb-logo.svg" alt="BarterWeb logo" />
+              <div>
+                <p>BarterWeb Dealbevestiging</p>
+                <strong id="agreementDealId">Concept</strong>
+              </div>
+            </div>
+            <div class="agreement-body">
+              <h2>Overeenkomst</h2>
+              <p>
+                Partijen bevestigen dat BarterWeb een digitale dienst levert in ruil voor een
+                afgesproken product, dienst of tegenprestatie.
+              </p>
+              <p>
+                De gemaakte afspraken zijn bindend nadat beide partijen digitaal akkoord hebben
+                gegeven. Eventuele extra werkzaamheden buiten deze afspraak worden apart besproken
+                en bevestigd.
+              </p>
+              <dl id="agreementDetails">
+                <dt>Partijen</dt><dd>Nog niet ingevuld</dd>
+                <dt>BarterWeb levert</dt><dd>Nog niet ingevuld</dd>
+                <dt>Klant ruilt</dt><dd>Nog niet ingevuld</dd>
+                <dt>Dealwaarde</dt><dd>Nog niet ingevuld</dd>
+                <dt>Levertermijn</dt><dd>Nog niet ingevuld</dd>
+                <dt>Status</dt><dd>Concept</dd>
+              </dl>
+              <div class="signature-preview">
+                <span>Handtekening klant</span>
+                <img id="signaturePreview" alt="" />
+              </div>
+            </div>
+            <div class="agreement-actions">
+              <button class="button ghost" type="button" id="printAgreement">Download / print PDF</button>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer site-footer">
+      <div class="container footer-grid">
+        <div class="footer-brand-block">
+          <a class="brand" href="./index.html">
+            <span class="brand-mark"><i></i></span>
+            <strong>Barter<span>Web</span></strong>
+          </a>
+          <p>Leg barterdeals helder vast met afspraken, voorwaarden en handtekening.</p>
+        </div>
+        <div class="footer-column">
+          <h3>Website</h3>
+          <a href="./index.html#barter">Wat is barter?</a>
+          <a href="./index.html#model">Model</a>
+          <a href="./index.html#proces">Proces</a>
+          <a href="./index.html#pakket">Pakket</a>
+        </div>
+        <div class="footer-column">
+          <h3>Regelen</h3>
+          <a href="./index.html#aanvraag">Aanvraag starten</a>
+          <a href="./deal-bevestiging.html">Dealbevestiging</a>
+          <a href="./algemene-voorwaarden.html">Algemene voorwaarden</a>
+          <a href="./privacyverklaring.html">Privacyverklaring</a>
+        </div>
+        <div class="footer-column">
+          <h3>Contact</h3>
+          <a href="mailto:info@barterweb.nl">info@barterweb.nl</a>
+          <a href="https://barterweb.nl">barterweb.nl</a>
+          <span>Reactie meestal binnen 24 uur</span>
+        </div>
+      </div>
+      <div class="container footer-bottom">
+        <p>&copy; 2026 BarterWeb. Alle rechten voorbehouden.</p>
+        <p>Value-first collaborations.</p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="./deal.js"></script>
+  </body>
+</html>

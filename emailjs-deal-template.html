@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8">
+    <title>BarterWeb dealbevestiging</title>
+  </head>
+  <body style="margin:0; padding:0; background:#f3f8fb; font-family:Arial, Helvetica, sans-serif; color:#111827;">
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:#f3f8fb; padding:28px 14px;">
+      <tr>
+        <td align="center">
+          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="max-width:720px; background:#ffffff; border-radius:26px; overflow:hidden; box-shadow:0 24px 70px rgba(34,64,94,0.14);">
+            <tr>
+              <td style="padding:34px; background:linear-gradient(135deg,#111827,#243247); color:#ffffff;">
+                <img src="{{logo_url}}" width="46" height="46" alt="BarterWeb logo" style="display:inline-block; border:0; border-radius:14px; vertical-align:middle;">
+                <span style="display:inline-block; margin-left:12px; font-size:20px; font-weight:900; vertical-align:middle;">BarterWeb</span>
+                <h1 style="margin:30px 0 0; font-size:38px; line-height:1.08;">Dealbevestiging {{deal_id}}</h1>
+                <p style="margin:14px 0 0; color:#cbd5e1; font-size:16px; line-height:1.65;">De deal is als concept vastgelegd. Na akkoord van beide partijen is de afspraak bindend volgens de afgesproken voorwaarden.</p>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:30px;">
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+                  <tr>
+                    <td style="padding:18px; border:1px solid #dce7ee; border-radius:18px; background:#f8fcff;">
+                      <p style="margin:0 0 8px; color:#0fbaa5; font-size:12px; font-weight:900; letter-spacing:1px; text-transform:uppercase;">Partijen</p>
+                      <p style="margin:0; color:#111827; font-size:16px; line-height:1.65;">
+                        {{customer_name}}<br>
+                        {{company_name}}<br>
+                        {{customer_email}} · {{customer_phone}}
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-top:16px;">
+                  <tr>
+                    <td width="50%" style="padding:0 8px 0 0; vertical-align:top;">
+                      <div style="min-height:190px; padding:18px; border:1px solid #dce7ee; border-radius:18px;">
+                        <p style="margin:0 0 8px; color:#2563eb; font-size:12px; font-weight:900; letter-spacing:1px; text-transform:uppercase;">BarterWeb levert</p>
+                        <h2 style="margin:0 0 10px; font-size:21px;">{{barterweb_deliverable}}</h2>
+                        <p style="margin:0; color:#60728c; font-size:14px; line-height:1.65;">{{barterweb_scope}}</p>
+                        <p style="margin:16px 0 0; color:#111827; font-size:14px;"><strong>Waarde:</strong> {{barterweb_value}}</p>
+                        <p style="margin:8px 0 0; color:#111827; font-size:14px;"><strong>Levering:</strong> {{barterweb_delivery_date}}</p>
+                      </div>
+                    </td>
+                    <td width="50%" style="padding:0 0 0 8px; vertical-align:top;">
+                      <div style="min-height:190px; padding:18px; border:1px solid #dce7ee; border-radius:18px;">
+                        <p style="margin:0 0 8px; color:#0fbaa5; font-size:12px; font-weight:900; letter-spacing:1px; text-transform:uppercase;">Klant ruilt</p>
+                        <h2 style="margin:0 0 10px; font-size:21px;">{{customer_trade}}</h2>
+                        <p style="margin:0; color:#60728c; font-size:14px; line-height:1.65;">{{customer_trade_details}}</p>
+                        <p style="margin:16px 0 0; color:#111827; font-size:14px;"><strong>Waarde:</strong> {{customer_value}}</p>
+                        <p style="margin:8px 0 0; color:#111827; font-size:14px;"><strong>Levering:</strong> {{customer_delivery_date}}</p>
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+
+                <div style="margin-top:18px; padding:20px; border-radius:18px; background:#111827; color:#ffffff;">
+                  <h3 style="margin:0 0 10px; font-size:18px;">Voorwaarden</h3>
+                  <p style="margin:0; color:#cbd5e1; font-size:14px; line-height:1.7;">
+                    Deal is pas geldig na akkoord van beide partijen. Beide partijen leveren volgens afspraak. Extra werk valt buiten deze deal. Bij niet leveren mag de deal worden geannuleerd. BarterWeb mag het project als portfolio gebruiken.
+                  </p>
+                </div>
+
+                <p style="margin:22px 0 0; color:#60728c; font-size:13px; line-height:1.6;">Status: <strong>{{status}}</strong>. Bewaar deze e-mail goed. Download de PDF vanaf de dealbevestigingspagina als extra kopie.</p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
