@@ -58,6 +58,11 @@
         <a href="#pakket">Pakket</a>
         <a href="#voor-wie">Voor wie</a>
       </nav>
+      <div class="header-social" aria-label="Social media">
+        <a href="https://www.youtube.com/@BarterWebNL" target="_blank" rel="noopener noreferrer" aria-label="YouTube">YT</a>
+        <a href="https://www.linkedin.com/in/barter-web-b580a8411" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">in</a>
+        <a href="https://www.instagram.com/Barterweb.nl" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
+      </div>
       <a class="nav-cta" href="#aanvraag">Start aanvraag</a>
     </header>
 
@@ -73,8 +78,9 @@
               Wij bouwen jouw digitale groeisysteem.
             </p>
             <div class="hero-actions">
-              <a class="button primary" href="#aanvraag">Plan je samenwerking <span>&rarr;</span></a>
-              <a class="button ghost" href="#model">Bekijk het model</a>
+              <a class="button primary" href="#tools">Gratis website scan aanvragen <span>&rarr;</span></a>
+              <a class="button ghost" href="#aanvraag">Ruilvoorstel doen</a>
+              <a class="button ghost" href="/website-moderniseren">Website/webshop moderniseren</a>
             </div>
             <div class="signal-row" aria-label="Belangrijkste voordelen">
               <div><strong>Barter</strong><span>waarde in plaats van cash</span></div>
@@ -335,6 +341,50 @@
         </div>
       </section>
 
+      <section class="section conversion-section">
+        <div class="container section-head">
+          <p class="eyebrow">Eerlijke marketing</p>
+          <h2>Geen fake testimonials. Wel zichtbare groei, scans en redesign concepten.</h2>
+          <p>
+            BarterWeb groeit transparant: met before/after redesigns, gratis analyses, building-in-public
+            updates en praktische content voor ondernemers die online sterker willen worden.
+          </p>
+        </div>
+        <div class="container concept-row">
+          <article class="concept-card reveal">
+            <span>Before / after</span>
+            <h3>Redesign concepten voor echte branches.</h3>
+            <p>We tonen concepten voor onder andere tattoo shops, detailers en horeca/webshops. Geen nepklanten, maar duidelijke voorbeelden van betere UX, mobiel ontwerp en conversie.</p>
+            <div class="mini-before-after">
+              <div><strong>Voor</strong><ul><li>Oude layout</li><li>Weinig vertrouwen</li><li>Zwak mobiel</li></ul></div>
+              <div><strong>Na</strong><ul><li>Sterke CTA</li><li>Modern design</li><li>Snelle flow</li></ul></div>
+            </div>
+          </article>
+          <article class="concept-card reveal">
+            <span>Building in public</span>
+            <h3>Volg hoe BarterWeb groeit.</h3>
+            <p>Nieuwe designs, website updates, AI-tools, marketingexperimenten en social groei worden gedeeld via YouTube, Instagram en LinkedIn.</p>
+            <div class="social-links">
+              <a href="https://www.youtube.com/@BarterWebNL" target="_blank" rel="noopener noreferrer"><span>YT</span>YouTube</a>
+              <a href="https://www.linkedin.com/in/barter-web-b580a8411" target="_blank" rel="noopener noreferrer"><span>in</span>LinkedIn</a>
+              <a href="https://www.instagram.com/Barterweb.nl" target="_blank" rel="noopener noreferrer"><span>IG</span>Instagram</a>
+            </div>
+          </article>
+        </div>
+        <div class="container conversion-grid">
+          <article class="conversion-card reveal"><span>Wat kan beter?</span><h3>Website scan content</h3><p>Waarom oude websites klanten kosten, welke mobiele fouten vaak voorkomen en hoe lokale ondernemers sneller vertrouwen winnen.</p></article>
+          <article class="conversion-card reveal"><span>Wat kun je ruilen?</span><h3>Diensten, producten of bereik</h3><p>Bijvoorbeeld fotografie, detailing, tattoo werk, content, voorraad, netwerk, leads of een andere concrete bijdrage.</p></article>
+          <article class="conversion-card reveal"><span>Gratis overstapservice</span><h3>Domein en livegang hulp</h3><p>We helpen met domeinkoppeling, Cloudflare, livegang en basisoverstap zodat je niet vastloopt op techniek.</p></article>
+        </div>
+        <div class="container cta-panel reveal">
+          <div>
+            <h3>Wil je weten wat jouw website nu laat liggen?</h3>
+            <p>Vraag een gratis scan aan en ontvang concrete verbeterpunten voor mobiel, snelheid, SEO, vertrouwen en conversie.</p>
+          </div>
+          <a class="button primary" href="/gratis-website-scan">Gratis website scan aanvragen <span>&rarr;</span></a>
+        </div>
+      </section>
+
       <section id="proces" class="section process-section section-grid">
         <div class="container section-head center">
           <p class="eyebrow">Van idee naar live platform</p>
@@ -479,10 +529,23 @@
           <form class="contact-form">
             <div class="form-row">
               <input type="text" name="name" placeholder="Jouw naam" aria-label="Jouw naam" required />
+              <input type="text" name="company_name" placeholder="Bedrijfsnaam" aria-label="Bedrijfsnaam" />
+            </div>
+            <div class="form-row">
+              <input type="url" name="current_website" placeholder="Huidige website" aria-label="Huidige website" />
               <input type="email" name="email" placeholder="E-mailadres" aria-label="E-mailadres" required />
             </div>
-            <input type="text" name="project_type" placeholder="Wat wil je laten bouwen?" aria-label="Projecttype" required />
-            <textarea name="message" placeholder="Welke waarde kun jij inbrengen als samenwerking?" aria-label="Samenwerkingswaarde" required></textarea>
+            <select name="project_type" aria-label="Wat wil je laten maken?" required>
+              <option value="">Wat wil je laten maken?</option>
+              <option>Website laten maken</option>
+              <option>Webshop laten maken</option>
+              <option>Website/webshop moderniseren</option>
+              <option>Gratis website scan</option>
+              <option>Gratis overstapservice</option>
+              <option>Barter deal bespreken</option>
+            </select>
+            <input type="text" name="trade_value" placeholder="Wat wil je eventueel ruilen?" aria-label="Wat wil je eventueel ruilen?" />
+            <textarea name="message" placeholder="Bericht of extra context..." aria-label="Bericht" required></textarea>
             <input type="hidden" name="website_url" value="https://barterweb.nl" />
             <input type="hidden" name="logo_url" value="https://barterweb.nl/barterweb-logo.svg" />
             <button type="submit">Start mijn aanvraag <span>&rarr;</span></button>
@@ -522,6 +585,9 @@
           <h3>Website</h3>
           <a href="#barter">Wat is barter?</a>
           <a href="#tools">Gratis tools</a>
+          <a href="/website-laten-maken">Website laten maken</a>
+          <a href="/webshop-laten-maken">Webshop laten maken</a>
+          <a href="/website-moderniseren">Website moderniseren</a>
           <a href="#model">Model</a>
           <a href="#proces">Proces</a>
           <a href="#pakket">Pakket</a>
@@ -530,6 +596,9 @@
         <div class="footer-column">
           <h3>Regelen</h3>
           <a href="#aanvraag">Aanvraag starten</a>
+          <a href="/gratis-website-scan">Gratis website scan</a>
+          <a href="/gratis-overstapservice">Gratis overstapservice</a>
+          <a href="/barter-deal">Ruilvoorstel doen</a>
           <a href="/deal-bevestiging">Dealbevestiging</a>
           <a href="/algemene-voorwaarden">Algemene voorwaarden</a>
           <a href="/privacyverklaring">Privacyverklaring</a>
@@ -565,7 +634,7 @@
             ]
           },
           {
-            "@type": "ProfessionalService",
+            "@type": "LocalBusiness",
             "@id": "https://barterweb.nl/#service",
             "name": "BarterWeb",
             "url": "https://barterweb.nl/",
