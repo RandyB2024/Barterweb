@@ -1626,6 +1626,207 @@ textarea::placeholder {
   box-shadow: var(--shadow);
 }
 
+.tools-redesign {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(320px, 0.65fr);
+  gap: 20px;
+  align-items: stretch;
+}
+
+.scan-card,
+.monitor-strip,
+.simple-tool-card {
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 20px 54px rgba(34, 64, 94, 0.1);
+}
+
+.scan-card {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: 22px;
+  padding: 28px;
+  border-radius: 30px;
+}
+
+.scan-copy {
+  display: grid;
+  align-content: center;
+}
+
+.scan-copy span,
+.simple-tool-card span {
+  color: var(--teal);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.scan-copy h3 {
+  margin: 14px 0 18px;
+  font-size: clamp(32px, 3.7vw, 54px);
+  line-height: 1.03;
+}
+
+.scan-copy p,
+.simple-tool-card p,
+.monitor-strip p,
+.scan-score p,
+.monitor-benefits p {
+  color: var(--muted);
+  line-height: 1.72;
+}
+
+.scan-form {
+  display: grid;
+  gap: 14px;
+  align-content: start;
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: linear-gradient(145deg, #ffffff, #f5fbff);
+}
+
+.score-switches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.score-switches label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 9px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: #40566f;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.score-switches input {
+  width: 16px;
+  min-height: 16px;
+  accent-color: var(--teal);
+}
+
+.scan-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.scan-actions .button {
+  min-height: 52px;
+}
+
+.scan-form small,
+.monitor-form small {
+  color: #718196;
+}
+
+.scan-score {
+  grid-column: 1 / -1;
+  padding: 24px;
+  border: 1px solid rgba(15, 186, 165, 0.22);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at 92% 10%, rgba(37,99,235,0.12), transparent 30%),
+    linear-gradient(145deg, #ffffff, #edf8fb);
+}
+
+.scan-score small {
+  color: var(--teal);
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+.scan-score strong {
+  display: block;
+  margin: 10px 0 12px;
+  font-size: clamp(46px, 6vw, 78px);
+  line-height: 1;
+}
+
+.scan-score ul,
+.monitor-benefits ul {
+  margin: 16px 0 0;
+  padding-left: 20px;
+  color: #52657d;
+  line-height: 1.72;
+}
+
+.tools-side-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.simple-tool-card {
+  padding: 24px;
+  border-radius: 24px;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.simple-tool-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(15, 186, 165, 0.34);
+  box-shadow: 0 22px 60px rgba(34, 64, 94, 0.14);
+}
+
+.simple-tool-card h3 {
+  margin: 12px 0 10px;
+  font-size: 22px;
+  line-height: 1.16;
+}
+
+.simple-tool-card a {
+  display: inline-flex;
+  margin-top: 8px;
+  color: var(--blue);
+  font-weight: 900;
+}
+
+.monitor-strip {
+  display: grid;
+  grid-template-columns: 0.9fr 1fr 0.8fr;
+  gap: 20px;
+  align-items: start;
+  margin-top: 20px;
+  padding: 28px;
+  border-radius: 30px;
+}
+
+.monitor-strip h3 {
+  margin: 0 0 14px;
+  font-size: clamp(28px, 3vw, 44px);
+  line-height: 1.06;
+}
+
+.monitor-form {
+  display: grid;
+  gap: 14px;
+}
+
+.monitor-benefits {
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: #f8fcff;
+}
+
+.monitor-benefits strong {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 28px;
+  line-height: 1;
+}
+
 .tool-tabs {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -2105,6 +2306,9 @@ textarea::placeholder {
   .deal-hero-layout,
   .deal-layout,
   .footer-grid,
+  .tools-redesign,
+  .scan-card,
+  .monitor-strip,
   .landing-layout,
   .landing-grid,
   .conversion-grid,
@@ -2210,6 +2414,9 @@ textarea::placeholder {
   .barter-panel,
   .deal-hero-layout,
   .deal-layout,
+  .tools-redesign,
+  .scan-card,
+  .monitor-strip,
   .landing-layout,
   .landing-grid,
   .conversion-grid,
