@@ -194,6 +194,46 @@ if (bioButton) {
   });
 }
 
+const growthButton = document.querySelector("#runGrowthQuiz");
+
+if (growthButton) {
+  growthButton.addEventListener("click", () => {
+    const selected = [...document.querySelectorAll(".growth-option:checked")].map((item) => Number(item.value));
+    const score = Math.min(100, selected.reduce((sum, value) => sum + value, 0));
+    document.querySelector("#growthScore").textContent = `${score}/100`;
+    document.querySelector("#growthFeedback").textContent =
+      score >= 78
+        ? "Je basis is sterk. De grootste winst zit nu in content, lokale SEO en conversie-experimenten."
+        : score >= 48
+          ? "Je hebt al onderdelen staan, maar je mist waarschijnlijk consistentie, snelheid of vertrouwen."
+          : "Er ligt veel groeiruimte. Begin met een moderne mobiele basis, Google zichtbaarheid en een duidelijke aanvraagflow.";
+    const tips = [];
+    if (!document.querySelector(".growth-option[value='18']").checked) tips.push("Moderniseer je website of homepage.");
+    if (!document.querySelector(".growth-option[value='16']").checked) tips.push("Zet je Google profiel en reviews scherper neer.");
+    if (!document.querySelector(".growth-option[value='15']").checked) tips.push("Maak wekelijkse content over je werk en resultaten.");
+    if (!document.querySelector(".growth-option[value='17']").checked) tips.push("Verbeter mobiele snelheid en scanbaarheid.");
+    setList("#growthTips", tips.length ? tips.slice(0, 4) : ["Test nieuwe CTA's.", "Maak lokale SEO pagina's.", "Publiceer before/after content."]);
+  });
+}
+
+const mockupButton = document.querySelector("#runMockup");
+
+if (mockupButton) {
+  mockupButton.addEventListener("click", () => {
+    const name = document.querySelector("#mockupName").value.trim() || "Jouw bedrijf";
+    const industry = document.querySelector("#mockupIndustry").value.trim() || "lokale ondernemer";
+    const action = document.querySelector("#mockupAction").value.trim() || "een aanvraag doen";
+    document.querySelector("#mockupHeadline").textContent = `${name}: moderne ${industry} homepage`;
+    document.querySelector("#mockupIntro").textContent = `Positioneer ${name} als betrouwbare keuze met een duidelijke belofte, visueel bewijs en een directe knop om ${action}.`;
+    setList("#mockupSections", [
+      `Hero: belofte + knop "${action}".`,
+      "Bewijsblok: werk, resultaten of concept redesigns.",
+      "Aanbod: 3 heldere diensten of pakketten.",
+      "FAQ + contactblok voor snelle conversie.",
+    ]);
+  });
+}
+
 function formatRange(range) {
   return `EUR ${range[0].toLocaleString("nl-NL")} - EUR ${range[1].toLocaleString("nl-NL")}`;
 }

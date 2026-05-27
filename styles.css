@@ -756,6 +756,13 @@ h2 {
     radial-gradient(circle at 82% 20%, rgba(109,93,252,0.1), transparent 30%);
 }
 
+.strategy-section {
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.86), rgba(238,248,255,0.46)),
+    radial-gradient(circle at 10% 26%, rgba(15,186,165,0.08), transparent 28%),
+    radial-gradient(circle at 90% 12%, rgba(37,99,235,0.08), transparent 30%);
+}
+
 .conversion-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
