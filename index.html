@@ -194,6 +194,7 @@
         <div class="container tool-workspace reveal">
           <div class="tool-tabs" role="tablist" aria-label="Gratis BarterWeb tools">
             <button class="active" type="button" data-tool="scan">Website Scan</button>
+            <button type="button" data-tool="monitoring">24/7 Monitoring</button>
             <button type="button" data-tool="deal">Deal Calculator</button>
             <button type="button" data-tool="cost">Kosten Calculator</button>
             <button type="button" data-tool="bio">Social Bio</button>
@@ -229,6 +230,37 @@
                 <ul id="scanTips">
                   <li>Maak de hoofdactie direct zichtbaar.</li>
                   <li>Verbeter mobiele leesbaarheid en snelheid.</li>
+                </ul>
+              </div>
+            </article>
+
+            <article class="tool-panel" data-panel="monitoring">
+              <div class="tool-form">
+                <span>24/7 Website Monitoring</span>
+                <h3>Laat direct weten als je website offline, traag of onveilig lijkt.</h3>
+                <div class="form-row">
+                  <input id="monitorName" type="text" placeholder="Naam" aria-label="Naam voor monitoring" />
+                  <input id="monitorEmail" type="email" placeholder="E-mailadres" aria-label="E-mailadres voor monitoring" />
+                </div>
+                <label>Website URL <input id="monitorUrl" type="url" placeholder="https://jouwbedrijf.nl" /></label>
+                <div class="tool-checks">
+                  <label><input class="monitor-option" type="checkbox" value="uptime" checked /> Uptime controle</label>
+                  <label><input class="monitor-option" type="checkbox" value="speed" checked /> Snelheidscheck</label>
+                  <label><input class="monitor-option" type="checkbox" value="ssl" checked /> SSL/HTTPS check</label>
+                  <label><input class="monitor-option" type="checkbox" value="forms" /> Formuliercontrole</label>
+                </div>
+                <button class="button primary" type="button" id="runMonitoringCheck">Bekijk voordelen</button>
+                <button class="button ghost" type="button" id="sendMonitoringRequest">Gratis monitoring aanvragen</button>
+                <small class="monitor-form-status">Vraag gratis monitoring aan en ontvang een voorstel voor je website.</small>
+              </div>
+              <div class="tool-result">
+                <small>Monitoring voordelen</small>
+                <strong id="monitorScore">Altijd scherp</strong>
+                <p id="monitorFeedback">Met 24/7 monitoring merk je problemen sneller op voordat klanten afhaken.</p>
+                <ul id="monitorBenefits">
+                  <li>Je weet sneller wanneer je website offline is.</li>
+                  <li>Je voorkomt gemiste aanvragen door technische fouten.</li>
+                  <li>Je houdt snelheid, SSL en bereikbaarheid beter in de gaten.</li>
                 </ul>
               </div>
             </article>

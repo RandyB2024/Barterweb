@@ -1628,7 +1628,7 @@ textarea::placeholder {
 
 .tool-tabs {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 8px;
   padding: 12px;
   border-bottom: 1px solid var(--line);

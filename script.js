@@ -261,6 +261,89 @@ if (sendWebsiteScanButton) {
   });
 }
 
+const monitoringButton = document.querySelector("#runMonitoringCheck");
+
+if (monitoringButton) {
+  monitoringButton.addEventListener("click", () => {
+    const selected = [...document.querySelectorAll(".monitor-option:checked")].map((item) => item.value);
+    const url = document.querySelector("#monitorUrl").value.trim();
+    const benefits = [];
+
+    if (selected.includes("uptime")) benefits.push("Uptime controle: sneller zien wanneer je site niet bereikbaar is.");
+    if (selected.includes("speed")) benefits.push("Snelheidscheck: trage pagina's eerder opmerken voordat bezoekers afhaken.");
+    if (selected.includes("ssl")) benefits.push("SSL/HTTPS check: voorkomen dat je site onveilig oogt.");
+    if (selected.includes("forms")) benefits.push("Formuliercontrole: minder risico op gemiste aanvragen door kapotte formulieren.");
+
+    document.querySelector("#monitorScore").textContent = selected.length >= 3 ? "Sterke dekking" : "Basis monitoring";
+    document.querySelector("#monitorFeedback").textContent = url
+      ? `Voor ${url} is monitoring vooral waardevol om gemiste aanvragen, downtime en vertrouwensproblemen te voorkomen.`
+      : "Vul je website in om de monitoringvoordelen concreter te maken.";
+    setList("#monitorBenefits", benefits.length ? benefits : ["Start met uptime, snelheid en SSL als basiscontrole."]);
+  });
+}
+
+const monitoringRequestButton = document.querySelector("#sendMonitoringRequest");
+
+if (monitoringRequestButton) {
+  monitoringRequestButton.addEventListener("click", async () => {
+    const status = document.querySelector(".monitor-form-status");
+    const name = document.querySelector("#monitorName").value.trim();
+    const email = document.querySelector("#monitorEmail").value.trim();
+    const url = document.querySelector("#monitorUrl").value.trim();
+    const selected = [...document.querySelectorAll(".monitor-option:checked")].map((item) => item.parentElement.textContent.trim());
+
+    if (!name || !email || !url) {
+      if (status) status.textContent = "Vul naam, e-mail en website in om monitoring aan te vragen.";
+      return;
+    }
+
+    if (!window.emailjs) {
+      if (status) status.textContent = "EmailJS kon niet laden. Probeer het opnieuw.";
+      return;
+    }
+
+    monitoringRequestButton.disabled = true;
+    const originalText = monitoringRequestButton.innerHTML;
+    monitoringRequestButton.innerHTML = "Aanvraag verzenden...";
+    if (status) status.textContent = "Je monitoringaanvraag wordt verzonden.";
+
+    try {
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        name,
+        from_name: name,
+        email,
+        to_email: email,
+        reply_to: email,
+        company_name: "",
+        current_website: url,
+        project_type: "Gratis 24/7 website monitoring",
+        trade_value: "",
+        website_url: window.location.href,
+        logo_url: "https://barterweb.nl/barterweb-logo.svg",
+        message: `Gratis 24/7 monitoring aangevraagd voor ${url}. Gewenste controles: ${selected.join(", ") || "basiscontrole"}.`,
+        full_message: [
+          `Naam: ${name}`,
+          `E-mail: ${email}`,
+          `Website: ${url}`,
+          "Aanvraag: Gratis 24/7 website monitoring",
+          `Gewenste controles: ${selected.join(", ") || "basiscontrole"}`,
+        ].join("\n"),
+      });
+      if (status) status.textContent = "Gelukt. De monitoringaanvraag is verzonden.";
+      monitoringRequestButton.innerHTML = "Verzonden";
+      setTimeout(() => {
+        monitoringRequestButton.innerHTML = originalText;
+        monitoringRequestButton.disabled = false;
+      }, 2600);
+    } catch (error) {
+      console.error("EmailJS monitoring error:", error);
+      if (status) status.textContent = "Verzenden is niet gelukt. Controleer je gegevens en probeer opnieuw.";
+      monitoringRequestButton.innerHTML = originalText;
+      monitoringRequestButton.disabled = false;
+    }
+  });
+}
+
 const toolDealButton = document.querySelector("#runToolDeal");
 
 if (toolDealButton) {

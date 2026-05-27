@@ -15,6 +15,8 @@ Gebruik deze variabelen in je EmailJS template:
 - `{{website_scan_score}}` - score van de gratis website scan
 - `{{website_scan_feedback}}` - scanconclusie
 - `{{website_scan_tips}}` - verbeterpunten uit de scan
+- Voor monitoringaanvragen gebruikt `{{project_type}}` de waarde `Gratis 24/7 website monitoring`
+- Bij monitoring staat in `{{full_message}}` welke controles zijn gekozen
 - `{{website_url}}` - link naar je website, bijvoorbeeld `https://randyb2024.github.io/...`
 - `{{logo_url}}` - publieke URL naar het logo, bijvoorbeeld `https://randyb2024.github.io/jouw-repo/barterweb-logo.svg`
 
