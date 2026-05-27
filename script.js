@@ -33,6 +33,19 @@ function buildContactParams(form) {
   const message = formValue(form, "message");
   const sourceUrl = formValue(form, "website_url") || window.location.href;
   const logoUrl = formValue(form, "logo_url") || "https://barterweb.nl/barterweb-logo.svg";
+  const summary = [
+    `Naam: ${name}`,
+    `Bedrijfsnaam: ${companyName || "-"}`,
+    `Website: ${currentWebsite || "-"}`,
+    `E-mail: ${email}`,
+    `Aanvraag: ${projectType || "-"}`,
+  ];
+
+  if (tradeValue) {
+    summary.push(`Eventuele ruilwaarde: ${tradeValue}`);
+  }
+
+  summary.push(`Bericht: ${message || "-"}`, `Bronpagina: ${sourceUrl}`);
 
   return {
     name,
@@ -47,16 +60,7 @@ function buildContactParams(form) {
     message,
     website_url: sourceUrl,
     logo_url: logoUrl,
-    full_message: [
-      `Naam: ${name}`,
-      `Bedrijfsnaam: ${companyName || "-"}`,
-      `Website: ${currentWebsite || "-"}`,
-      `E-mail: ${email}`,
-      `Aanvraag: ${projectType || "-"}`,
-      `Eventuele ruilwaarde: ${tradeValue || "-"}`,
-      `Bericht: ${message || "-"}`,
-      `Bronpagina: ${sourceUrl}`,
-    ].join("\n"),
+    full_message: summary.join("\n"),
   };
 }
 
