@@ -9,18 +9,61 @@ document.querySelectorAll('a[href^="#"]').forEach((link) => {
   });
 });
 
-const form = document.querySelector(".contact-form");
+const EMAILJS_SERVICE_ID = "service_8hgaglq";
+const EMAILJS_TEMPLATE_ID = "template_0p71lv2";
+const EMAILJS_PUBLIC_KEY = "M5obhqMfQPx6qKQ9c";
 
-if (form) {
+if (window.emailjs) {
+  emailjs.init({
+    publicKey: EMAILJS_PUBLIC_KEY,
+  });
+}
+
+function formValue(form, name) {
+  return String(new FormData(form).get(name) || "").trim();
+}
+
+function buildContactParams(form) {
+  const name = formValue(form, "name");
+  const email = formValue(form, "email");
+  const companyName = formValue(form, "company_name");
+  const currentWebsite = formValue(form, "current_website");
+  const projectType = formValue(form, "project_type");
+  const tradeValue = formValue(form, "trade_value");
+  const message = formValue(form, "message");
+  const sourceUrl = formValue(form, "website_url") || window.location.href;
+  const logoUrl = formValue(form, "logo_url") || "https://barterweb.nl/barterweb-logo.svg";
+
+  return {
+    name,
+    from_name: name,
+    email,
+    to_email: email,
+    reply_to: email,
+    company_name: companyName,
+    current_website: currentWebsite,
+    project_type: projectType,
+    trade_value: tradeValue,
+    message,
+    website_url: sourceUrl,
+    logo_url: logoUrl,
+    full_message: [
+      `Naam: ${name}`,
+      `Bedrijfsnaam: ${companyName || "-"}`,
+      `Website: ${currentWebsite || "-"}`,
+      `E-mail: ${email}`,
+      `Aanvraag: ${projectType || "-"}`,
+      `Eventuele ruilwaarde: ${tradeValue || "-"}`,
+      `Bericht: ${message || "-"}`,
+      `Bronpagina: ${sourceUrl}`,
+    ].join("\n"),
+  };
+}
+
+document.querySelectorAll(".contact-form").forEach((form) => {
   const status = form.querySelector(".form-status");
   const submitButton = form.querySelector("button");
   const originalButtonText = submitButton ? submitButton.innerHTML : "";
-
-  if (window.emailjs) {
-    emailjs.init({
-      publicKey: "M5obhqMfQPx6qKQ9c",
-    });
-  }
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
@@ -40,7 +83,7 @@ if (form) {
     }
 
     try {
-      await emailjs.sendForm("service_8hgaglq", "template_0p71lv2", form);
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, buildContactParams(form));
       form.reset();
       if (submitButton) submitButton.innerHTML = "Aanvraag verzonden";
       if (status) status.textContent = "Gelukt. Je ontvangt zo een bevestiging per e-mail.";
@@ -60,7 +103,7 @@ if (form) {
       if (status) status.textContent = "Verzenden is niet gelukt. Controleer de gegevens en probeer opnieuw.";
     }
   });
-}
+});
 
 const serviceProfiles = [
   { keys: ["webshop", "ecommerce", "e-commerce", "shop"], value: [1200, 1800], hours: [18, 25], label: "Webshop" },
@@ -105,6 +148,11 @@ function setList(selector, items) {
 }
 
 const websiteScanButton = document.querySelector("#runWebsiteScan");
+let latestWebsiteScan = {
+  score: "64/100",
+  feedback: "Je website heeft een redelijke basis, maar mist waarschijnlijk conversie, snelheid of moderne uitstraling.",
+  tips: ["Maak de hoofdactie direct zichtbaar.", "Verbeter mobiele leesbaarheid en snelheid."],
+};
 
 if (websiteScanButton) {
   websiteScanButton.addEventListener("click", () => {
@@ -125,14 +173,87 @@ if (websiteScanButton) {
     });
 
     score = Math.min(100, score);
-    document.querySelector("#scanScore").textContent = `${score}/100`;
-    document.querySelector("#scanFeedback").textContent =
+    const feedback =
       score >= 82
         ? "Sterke basis. De grootste winst zit waarschijnlijk in conversie, content en vertrouwen."
         : score >= 62
           ? "Redelijke basis, maar er liggen duidelijke kansen om moderner, sneller en overtuigender te worden."
           : "Deze website loopt waarschijnlijk omzet mis door techniek, uitstraling of onduidelijke acties.";
-    setList("#scanTips", tips.length ? tips.slice(0, 3) : ["Voeg social proof toe.", "Test je belangrijkste CTA.", "Houd de snelheid scherp."]);
+    const resultTips = tips.length ? tips.slice(0, 3) : ["Voeg social proof toe.", "Test je belangrijkste CTA.", "Houd de snelheid scherp."];
+    latestWebsiteScan = {
+      score: `${score}/100`,
+      feedback,
+      tips: resultTips,
+    };
+    document.querySelector("#scanScore").textContent = `${score}/100`;
+    document.querySelector("#scanFeedback").textContent = feedback;
+    setList("#scanTips", resultTips);
+  });
+}
+
+const sendWebsiteScanButton = document.querySelector("#sendWebsiteScan");
+
+if (sendWebsiteScanButton) {
+  sendWebsiteScanButton.addEventListener("click", async () => {
+    const status = document.querySelector(".scan-form-status");
+    const name = document.querySelector("#scanLeadName").value.trim();
+    const email = document.querySelector("#scanLeadEmail").value.trim();
+    const scanUrl = document.querySelector("#scanUrl").value.trim();
+
+    if (!name || !email || !scanUrl) {
+      if (status) status.textContent = "Vul naam, e-mail en website in om de scan te ontvangen.";
+      return;
+    }
+
+    if (!window.emailjs) {
+      if (status) status.textContent = "EmailJS kon niet laden. Probeer het opnieuw.";
+      return;
+    }
+
+    sendWebsiteScanButton.disabled = true;
+    const originalText = sendWebsiteScanButton.innerHTML;
+    sendWebsiteScanButton.innerHTML = "Scan verzenden...";
+    if (status) status.textContent = "Je scan wordt verzonden.";
+
+    try {
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        name,
+        from_name: name,
+        email,
+        to_email: email,
+        reply_to: email,
+        company_name: "",
+        current_website: scanUrl,
+        project_type: "Gratis website scan",
+        trade_value: "",
+        website_scan_score: latestWebsiteScan.score,
+        website_scan_feedback: latestWebsiteScan.feedback,
+        website_scan_tips: latestWebsiteScan.tips.join("\n"),
+        website_url: window.location.href,
+        logo_url: "https://barterweb.nl/barterweb-logo.svg",
+        message: `Gratis website scan aangevraagd voor ${scanUrl}. Score: ${latestWebsiteScan.score}. ${latestWebsiteScan.feedback}`,
+        full_message: [
+          `Naam: ${name}`,
+          `E-mail: ${email}`,
+          `Website: ${scanUrl}`,
+          `Aanvraag: Gratis website scan`,
+          `Score: ${latestWebsiteScan.score}`,
+          `Feedback: ${latestWebsiteScan.feedback}`,
+          `Verbeterpunten:\n${latestWebsiteScan.tips.join("\n")}`,
+        ].join("\n"),
+      });
+      if (status) status.textContent = "Gelukt. De scan-aanvraag is verzonden.";
+      sendWebsiteScanButton.innerHTML = "Verzonden";
+      setTimeout(() => {
+        sendWebsiteScanButton.innerHTML = originalText;
+        sendWebsiteScanButton.disabled = false;
+      }, 2600);
+    } catch (error) {
+      console.error("EmailJS scan error:", error);
+      if (status) status.textContent = "Verzenden is niet gelukt. Controleer je gegevens en probeer opnieuw.";
+      sendWebsiteScanButton.innerHTML = originalText;
+      sendWebsiteScanButton.disabled = false;
+    }
   });
 }
 

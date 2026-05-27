@@ -206,6 +206,10 @@
               <div class="tool-form">
                 <span>Website Scan</span>
                 <h3>Hoe modern is je huidige website?</h3>
+                <div class="form-row">
+                  <input id="scanLeadName" type="text" placeholder="Naam" aria-label="Naam voor website scan" />
+                  <input id="scanLeadEmail" type="email" placeholder="E-mailadres" aria-label="E-mailadres voor website scan" />
+                </div>
                 <label>Website URL <input id="scanUrl" type="url" placeholder="https://jouwbedrijf.nl" /></label>
                 <div class="tool-checks">
                   <label><input id="scanMobile" type="checkbox" checked /> Mobielvriendelijk</label>
@@ -215,6 +219,8 @@
                   <label><input id="scanFast" type="checkbox" /> Laadt snel</label>
                 </div>
                 <button class="button primary" type="button" id="runWebsiteScan">Scan website</button>
+                <button class="button ghost" type="button" id="sendWebsiteScan">Ontvang gratis verbeterpunten</button>
+                <small class="scan-form-status">Vul naam, e-mail en website in om de scan per mail aan te vragen.</small>
               </div>
               <div class="tool-result">
                 <small>BarterWeb Score</small>
